@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <%- include('../partials/admin-header') %>
+  <main class="admin-main container">
+    <h1>Dashboard</h1>
+    <div class="stat-grid">
+      <div class="stat-card"><strong><%= stats.pages %></strong><span>Pages</span></div>
+      <div class="stat-card"><strong><%= stats.media %></strong><span>Media files</span></div>
+    </div>
+    <ul class="admin-links">
+      <li><a href="/admin/home">Edit home page content</a></li>
+      <li><a href="/admin/pages">Edit service &amp; content pages</a></li>
+      <li><a href="/admin/media">Upload images</a></li>
+      <li><a href="/admin/site">Site settings &amp; links</a></li>
+    </ul>
+  </main>
+</body>
+</html>

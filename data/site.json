@@ -1,0 +1,51 @@
+{
+  "siteName": "Voice Awareness",
+  "tagline": "Psychotherapy Counseling Services",
+  "domain": "voiceawareness.biz",
+  "company": "Voice Awareness Psychotherapy Services Inc.",
+  "owner": "Nayab Tahir",
+  "email": "info@voiceawareness.ca",
+  "phone": "(1) 800 857 0609",
+  "phoneTel": "+18008570609",
+  "janeApp": "https://voiceawareness.janeapp.com/#staff_member/1",
+  "psychologyToday": "https://www.psychologytoday.com/ca/therapists/nayab-tahir-richmond-hill-on/1395672",
+  "linkedin": "https://www.linkedin.com/in/nayab-tahir-93920778/?originalSubdomain=ca",
+  "youtube": "https://www.youtube.com/watch?v=M3drdL08sy8",
+  "firstSession": "https://www.firstsession.ca/therapists/nayab-tahir",
+  "calendarUrl": "https://voiceawareness.janeapp.com/",
+  "metaDescription": "IFS-certified psychotherapy for adults in Ontario — trauma therapy, stress management, EMDR, emotional stability, and mindfulness at Voice Awareness.",
+  "services": [
+    {
+      "slug": "stress-management",
+      "path": "/stress-management",
+      "title": "Stress Management",
+      "image": "/images/services/stress-management.jpg",
+      "icon": "leaf",
+      "summary": "Personalized stress management psychotherapy to manage and alleviate the pressures of stress causing factors leading to a joyful life with purpose."
+    },
+    {
+      "slug": "relationship-trauma",
+      "path": "/cope-with-relationship-trauma",
+      "title": "Cope With Relationship Trauma",
+      "image": "/images/services/relationship-trauma.jpg",
+      "icon": "heart",
+      "summary": "Therapeutic techniques to process thoughts and feelings, identify common ground, and expand your support system."
+    },
+    {
+      "slug": "emotional-stability",
+      "path": "/drive-emotional-stability",
+      "title": "Drive Emotional Stability",
+      "image": "/images/services/emotional-stability.jpg",
+      "icon": "balance",
+      "summary": "Learn emotion regulation skills when experiencing intensely low or high emotions related to temperament, environment, or trauma."
+    },
+    {
+      "slug": "personal-growth",
+      "path": "/enhance-personal-growth",
+      "title": "Enhance Personal Growth",
+      "image": "/images/services/personal-growth.jpg",
+      "icon": "growth",
+      "summary": "Identify road blocks, trigger self-awareness, and support personal evolution that helps you break through creative blocks."
+    }
+  ]
+}

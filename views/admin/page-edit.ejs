@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <%- include('../partials/admin-header') %>
+  <main class="admin-main container">
+    <h1>Edit: <%= page.title %></h1>
+    <form method="post" action="/admin/pages/save" class="admin-form">
+      <input type="hidden" name="slug" value="<%= page.slug %>" />
+      <label>Title <input type="text" name="title" value="<%= page.title %>" required /></label>
+      <label>Meta description <input type="text" name="metaDescription" value="<%= page.metaDescription || page.excerpt || '' %>" /></label>
+      <label>Body (Markdown)
+        <textarea name="body" rows="20" class="code-area"><%= page.body || '' %></textarea>
+      </label>
+      <input type="hidden" name="bodyFormat" value="markdown" />
+      <button type="submit" class="btn btn-primary">Save page</button>
+    </form>
+  </main>
+</body>
+</html>

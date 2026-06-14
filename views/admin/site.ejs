@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <%- include('../partials/admin-header') %>
+  <main class="admin-main container">
+    <h1>Site Settings</h1>
+    <form method="post" action="/admin/site" class="admin-form">
+      <label>Site name <input type="text" name="siteName" value="<%= site.siteName %>" /></label>
+      <label>Tagline <input type="text" name="tagline" value="<%= site.tagline %>" /></label>
+      <label>Domain <input type="text" name="domain" value="<%= site.domain %>" /></label>
+      <label>Phone <input type="text" name="phone" value="<%= site.phone %>" /></label>
+      <label>Phone (tel link) <input type="text" name="phoneTel" value="<%= site.phoneTel %>" /></label>
+      <label>Email <input type="email" name="email" value="<%= site.email %>" /></label>
+      <label>Jane App URL <input type="url" name="janeApp" value="<%= site.janeApp %>" /></label>
+      <label>Psychology Today URL <input type="url" name="psychologyToday" value="<%= site.psychologyToday %>" /></label>
+      <label>LinkedIn URL <input type="url" name="linkedin" value="<%= site.linkedin %>" /></label>
+      <label>YouTube URL <input type="url" name="youtube" value="<%= site.youtube %>" /></label>
+      <label>Calendar URL <input type="url" name="calendarUrl" value="<%= site.calendarUrl %>" /></label>
+      <label>Meta description <textarea name="metaDescription" rows="2"><%= site.metaDescription %></textarea></label>
+      <button type="submit" class="btn btn-primary">Save settings</button>
+    </form>
+  </main>
+</body>
+</html>

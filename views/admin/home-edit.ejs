@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <%- include('../partials/admin-header') %>
+  <main class="admin-main container">
+    <h1>Edit Home Page</h1>
+    <form method="post" action="/admin/home" class="admin-form">
+      <fieldset>
+        <legend>Hero</legend>
+        <label>Eyebrow <input type="text" name="heroEyebrow" value="<%= home.heroEyebrow %>" /></label>
+        <label>Title <input type="text" name="heroTitle" value="<%= home.heroTitle %>" /></label>
+        <label>Lead <textarea name="heroLead" rows="5"><%= home.heroLead %></textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>About Nayab</legend>
+        <label>Title <input type="text" name="aboutTitle" value="<%= home.aboutTitle %>" /></label>
+        <label>Subtitle <input type="text" name="aboutSubtitle" value="<%= home.aboutSubtitle %>" /></label>
+        <label>Body <textarea name="aboutBody" rows="8"><%= home.aboutBody %></textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>Services section</legend>
+        <label>Title <input type="text" name="servicesTitle" value="<%= home.servicesTitle %>" /></label>
+        <label>Intro <textarea name="servicesIntro" rows="3"><%= home.servicesIntro %></textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>Audience &amp; approaches</legend>
+        <label>Audience title <input type="text" name="audienceTitle" value="<%= home.audienceTitle %>" /></label>
+        <label>Audience intro <input type="text" name="audienceIntro" value="<%= home.audienceIntro %>" /></label>
+        <label>Audience items (one per line) <textarea name="audienceItems" rows="6"><%= (home.audienceItems || []).join('\n') %></textarea></label>
+        <label>Approaches title <input type="text" name="approachesTitle" value="<%= home.approachesTitle %>" /></label>
+        <label>Approaches items (one per line) <textarea name="approachesItems" rows="6"><%= (home.approachesItems || []).join('\n') %></textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>FAQs</legend>
+        <label>Section title <input type="text" name="faqsTitle" value="<%= home.faqsTitle %>" /></label>
+        <label>FAQs (JSON array) <textarea name="faqsJson" rows="12" class="code-area"><%= JSON.stringify(home.faqs || [], null, 2) %></textarea></label>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Save home page</button>
+    </form>
+  </main>
+</body>
+</html>

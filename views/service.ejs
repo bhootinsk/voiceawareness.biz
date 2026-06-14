@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { metaDescription: page.metaDescription }) %>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main class="page-main">
+    <section class="page-banner service-banner">
+      <div class="container">
+        <p class="section-label">Service</p>
+        <h1><%= page.title %></h1>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container content-body">
+        <%- page.html %>
+        <div class="cta-panel">
+          <h2>Ready to take the next step?</h2>
+          <p>Book a free consultation to discuss whether this service is right for you.</p>
+          <a href="<%= site.janeApp %>" class="btn btn-primary" target="_blank" rel="noopener">Book on Jane App</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

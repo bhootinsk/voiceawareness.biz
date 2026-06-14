@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body class="page-home">
+  <%- include('partials/header') %>
+
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="eyebrow"><%= home.heroEyebrow %></p>
+      <h1><%= home.heroTitle %></h1>
+      <% home.heroLead.split('\n\n').forEach(function(p) { %>
+        <p class="lead"><%= p %></p>
+      <% }); %>
+      <div class="hero-actions">
+        <a href="<%= site.janeApp %>" class="btn btn-primary" target="_blank" rel="noopener">Book a free consultation</a>
+        <a href="/my-approach" class="btn btn-outline">Learn about my approach</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <div class="container split-grid">
+      <div class="about-visual">
+        <div class="portrait-frame">
+          <img src="/images/nayab-portrait.webp" alt="<%= site.owner %>, Registered Psychotherapist" loading="lazy" onerror="this.src='/images/portrait-placeholder.svg'" />
+        </div>
+      </div>
+      <div>
+        <p class="section-label">About</p>
+        <h2><%= home.aboutTitle %></h2>
+        <h3 class="subtitle"><%= home.aboutSubtitle %></h3>
+        <% home.aboutBody.split('\n\n').forEach(function(p) { %>
+          <p><%= p %></p>
+        <% }); %>
+        <div class="connect-links">
+          <a href="<%= site.youtube %>" target="_blank" rel="noopener">YouTube</a>
+          <a href="<%= site.janeApp %>" target="_blank" rel="noopener">Jane App</a>
+          <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener">Psychology Today</a>
+          <a href="<%= site.firstSession %>" target="_blank" rel="noopener">First Session</a>
+          <a href="<%= site.linkedin %>" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services-section" id="services">
+    <div class="container">
+      <p class="section-label">Services</p>
+      <h2><%= home.servicesTitle %></h2>
+      <p class="section-intro"><%= home.servicesIntro %></p>
+      <div class="services-grid">
+        <% (site.services || []).forEach(function(service) { %>
+          <article class="service-card">
+            <% if (service.image) { %>
+              <img src="<%= service.image %>" alt="" class="service-card-image" loading="lazy" />
+            <% } %>
+            <h3><a href="<%= service.path %>"><%= service.title %></a></h3>
+            <p><%= service.summary %></p>
+            <a href="<%= service.path %>" class="text-link">Learn more</a>
+          </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section muted-section">
+    <div class="container two-col">
+      <div>
+        <h2><%= home.audienceTitle %></h2>
+        <p><%= home.audienceIntro %></p>
+      </div>
+      <ul class="check-list">
+        <% (home.audienceItems || []).forEach(function(item) { %>
+          <li><%= item %></li>
+        <% }); %>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <h2>Working With a Registered Psychotherapist</h2>
+        <p>Working with a Registered Psychotherapist provides a confidential and professional space to explore thoughts, emotions, and patterns without judgment. Therapy is collaborative and client-led, meaning you remain in control of the pace, focus, and depth of sessions.</p>
+        <p>In accordance with professional standards, therapy is conducted within clearly defined ethical and clinical boundaries. Informed consent, respect for autonomy, and emotional safety are prioritized throughout the therapeutic process.</p>
+      </div>
+      <div>
+        <h2><%= home.approachesTitle %></h2>
+        <ul class="check-list">
+          <% (home.approachesItems || []).forEach(function(item) { %>
+            <li><%= item %></li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section" id="faqs">
+    <div class="container">
+      <h2><%= home.faqsTitle %></h2>
+      <div class="faq-list">
+        <% (home.faqs || []).forEach(function(faq, i) { %>
+          <details class="faq-item" <%= i === 0 ? 'open' : '' %>>
+            <summary><%= faq.question %></summary>
+            <p><%= faq.answer %></p>
+          </details>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+      <div>
+        <h2>Contact Me</h2>
+        <p>Call toll free at <a href="tel:<%= site.phoneTel %>"><%= site.phone %></a> or send a message below.</p>
+        <p>You can also find me on <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener">Psychology Today</a>.</p>
+      </div>
+      <form class="contact-form" method="post" action="/contact">
+        <div class="form-row">
+          <label>First name <input type="text" name="firstName" required /></label>
+          <label>Last name <input type="text" name="lastName" required /></label>
+        </div>
+        <label>Email <input type="email" name="email" required /></label>
+        <label>Phone <input type="tel" name="phone" /></label>
+        <label>Message <textarea name="message" rows="5" required></textarea></label>
+        <label class="checkbox-label">
+          <input type="checkbox" name="inOntario" value="yes" />
+          Are you located in Ontario, CA?
+        </label>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

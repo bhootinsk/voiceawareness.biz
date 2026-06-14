@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-main narrow">
+    <h1>Admin Login</h1>
+    <% if (error) { %><p class="error">Invalid username or password.</p><% } %>
+    <% if (sessionLost) { %><p class="notice">Please sign in to continue.</p><% } %>
+    <form method="post" action="/admin/login" class="admin-form">
+      <input type="hidden" name="redirect" value="<%= redirect %>" />
+      <label>Username <input type="text" name="user" autocomplete="username" required /></label>
+      <label>Password <input type="password" name="pass" autocomplete="current-password" required /></label>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>

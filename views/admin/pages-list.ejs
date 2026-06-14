@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <%- include('../partials/admin-header') %>
+  <main class="admin-main container">
+    <h1>Pages</h1>
+    <table class="admin-table">
+      <thead><tr><th>Title</th><th>Slug</th><th></th></tr></thead>
+      <tbody>
+        <% pages.forEach(function(page) { %>
+          <tr>
+            <td><%= page.title %></td>
+            <td><code><%= page.slug %></code></td>
+            <td><a href="/admin/pages/edit/<%= page.slug %>">Edit</a></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

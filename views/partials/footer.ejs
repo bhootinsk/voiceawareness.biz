@@ -1,0 +1,30 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <strong><%= site.siteName %></strong>
+      <p><%= site.company %></p>
+      <p><a href="tel:<%= site.phoneTel %>"><%= site.phone %></a></p>
+    </div>
+    <div>
+      <h3>Connect</h3>
+      <ul class="footer-links">
+        <li><a href="<%= site.janeApp %>" target="_blank" rel="noopener">Jane App</a></li>
+        <li><a href="<%= site.psychologyToday %>" target="_blank" rel="noopener">Psychology Today</a></li>
+        <li><a href="<%= site.linkedin %>" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="<%= site.youtube %>" target="_blank" rel="noopener">YouTube</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Services</h3>
+      <ul class="footer-links">
+        <% (site.services || []).forEach(function(service) { %>
+          <li><a href="<%= service.path %>"><%= service.title %></a></li>
+        <% }); %>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <%= new Date().getFullYear() %> <%= site.company %>. All rights reserved.</p>
+  </div>
+</footer>
+<script src="/js/site.js" defer></script>

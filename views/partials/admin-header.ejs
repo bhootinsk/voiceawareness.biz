@@ -1,0 +1,20 @@
+<header class="admin-header">
+  <div class="container admin-header-inner">
+    <a href="/admin" class="admin-brand">Voice Awareness CMS</a>
+    <nav>
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/home">Home</a>
+      <a href="/admin/pages">Pages</a>
+      <a href="/admin/site">Settings</a>
+      <a href="/admin/media">Media</a>
+      <a href="/" target="_blank" rel="noopener">View site</a>
+    </nav>
+    <form method="post" action="/admin/logout" class="admin-logout">
+      <span><%= adminUser %></span>
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</header>
+<% if (typeof flash !== 'undefined' && flash) { %>
+  <div class="flash flash-<%= flash.level %>"><%= flash.message %></div>
+<% } %>

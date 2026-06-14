@@ -1,0 +1,24 @@
+{
+  "name": "voiceawareness-biz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "voiceawareness.biz — Node.js site with simple CMS (derived from voiceawareness.ca)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "marked": "^15.0.6",
+    "multer": "^1.4.5-lts.1",
+    "slugify": "^1.6.6",
+    "uuid": "^11.0.5"
+  }
+}

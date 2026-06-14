@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | CMS</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="admin-body">
+  <%- include('../partials/admin-header') %>
+  <main class="admin-main container">
+    <h1>Media Library</h1>
+    <form method="post" action="/admin/media/upload" enctype="multipart/form-data" class="admin-form inline-form">
+      <label>Upload files <input type="file" name="files" accept="image/*,.pdf" multiple required /></label>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    <p class="help">After upload, copy the URL (e.g. <code>/uploads/filename.jpg</code>) into page content or replace images in <code>public/images/</code>.</p>
+    <div class="media-grid">
+      <% if (!media.length) { %>
+        <p>No uploads yet.</p>
+      <% } %>
+      <% media.forEach(function(item) { %>
+        <figure class="media-item">
+          <% if (/\.(jpe?g|png|gif|webp|svg)$/i.test(item.filename)) { %>
+            <img src="<%= item.url %>" alt="" />
+          <% } else { %>
+            <div class="media-file"><%= item.filename %></div>
+          <% } %>
+          <figcaption>
+            <code><%= item.url %></code>
+            <form method="post" action="/admin/media/delete" onsubmit="return confirm('Delete this file?');">
+              <input type="hidden" name="filename" value="<%= item.filename %>" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </main>
+</body>
+</html>
