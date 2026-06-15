@@ -99,7 +99,7 @@ ADMIN_PASSWORD=your-strong-password
 
 **Important:** Change the default admin password before going live.
 
-If Plesk assigns a different port automatically, use that port in `.env` and in `httpdocs/.htaccess` (see Phase 7).
+If Plesk assigns a different port automatically, use that port in `.env` and in **Additional Apache directives** (see Phase 7).
 
 ---
 
@@ -122,19 +122,35 @@ Writable folders (admin uploads + CMS edits):
 
 ---
 
-## Phase 7 — Document root & proxy
+## Phase 7 — Document root & proxy (Plesk nginx → Apache)
 
-Plesk should use **httpdocs** as the public web root. This repo includes `httpdocs/.htaccess` to proxy requests to Node.
+Plesk uses **nginx in front of Apache**. Do **not** put `ProxyPass` or `ProxyPreserveHost` in `httpdocs/.htaccess` — Apache returns **500** (`ProxyPreserveHost not allowed here`).
 
 1. **Hosting Settings** → confirm **Document root** = `httpdocs`
-2. Ensure **Apache proxy modules** are enabled (Plesk usually handles this when Node.js is enabled).
-3. If your Node app runs on a port other than `3000`, edit `httpdocs/.htaccess`:
+2. **Apache & nginx Settings** → **Additional Apache directives** (leave **Additional nginx directives** empty):
 
 ```apache
-RewriteRule ^(.*)$ http://127.0.0.1:YOUR_PORT/$1 [P,L]
+<IfModule mod_proxy.c>
+  ProxyPreserveHost On
+  ProxyPass / http://127.0.0.1:3000/
+  ProxyPassReverse / http://127.0.0.1:3000/
+</IfModule>
 ```
 
-The port is shown in **Node.js** settings after you click **Restart App**.
+3. On the server, disable any proxy rules in `httpdocs/.htaccess`:
+
+```bash
+mv /var/www/vhosts/voiceawareness.biz/httpdocs/.htaccess /var/www/vhosts/voiceawareness.biz/httpdocs/.htaccess.bak
+plesk sbin httpdmng --reconfigure-domain voiceawareness.biz
+```
+
+4. If proxy fails, enable modules: `a2enmod proxy proxy_http && systemctl reload apache2`
+
+5. Start Node on port 3000 (Plesk **Restart App** or `nohup node app.js` as the subscription user).
+
+6. Verify: `curl -sk https://www.voiceawareness.biz/deploy-check` → JSON with `"ok":true`
+
+If your Node app uses a port other than `3000`, change the port in the Apache directives above and in `.env`.
 
 ---
 
@@ -198,7 +214,7 @@ Then **Restart App** in Plesk Node.js (or use Plesk Git auto-deploy if configure
 | Static files 404 | Confirm `public/` exists at application root; restart Node |
 | Admin login fails | Check `ADMIN_USERNAME` / `ADMIN_PASSWORD` in `.env` and restart app |
 | CMS save fails | Fix permissions on `content/`, `data/`, `uploads/` (`775`) |
-| Wrong port | Match `.env` `PORT`, Plesk Node.js port, and `httpdocs/.htaccess` |
+| Wrong port | Match `.env` `PORT`, Node listen port, and Apache `ProxyPass` port |
 | Session lost on login | Ensure `NODE_ENV=production`, SSL enabled, and `trust proxy` is active (already set in `app.js`) |
 
 ---

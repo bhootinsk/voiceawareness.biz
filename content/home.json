@@ -1,12 +1,25 @@
 {
   "heroEyebrow": "Find Your Inner Peace at Voice Awareness",
   "heroTitle": "Psychotherapy Counseling Services",
-  "heroLead": "At VoiceAwareness Psychotherapy, we offer psychotherapy and counseling services for adults navigating anxiety, trauma, emotional overwhelm, relationship challenges, and life transitions. Our work is grounded in evidence-based and trauma-informed care, with a strong emphasis on collaboration, consent, and emotional safety.\n\nTherapy is not about quick fixes or being told what to do. It is a supportive process focused on increasing self-awareness, developing coping skills, and supporting long-term mental health and well-being.",
+  "heroLead": "At VoiceAwareness Psychotherapy, we offer psychotherapy and counseling services for adults navigating anxiety, trauma, emotional overwhelm, relationship challenges, and life transitions. Our work is grounded in evidence-based and trauma-informed care, with a strong emphasis on collaboration, consent, and emotional safety.\n\nTherapy is not about quick fixes or being told what to do. It is a supportive process focused on increasing self-awareness, developing coping skills, and supporting long-term mental health and well-being. Services are individualized and thoughtfully adapted to each client's needs, experiences, and goals.",
+  "heroButtonText": "Schedule a Booking",
+  "heroButtonLink": "/calendar",
   "aboutTitle": "Hello, I'm Nayab",
   "aboutSubtitle": "Your Personal Psycho Therapist and Counselor",
-  "aboutBody": "I am pleased to present myself as a dedicated psychotherapist based in Canada. A unique combination of my qualifications including a master's degree in counselling psychology (MACP) from Yorkville University, a Bachelor of Arts in Psychology, and a Bachelor of Science in Pharmacy enables me to understand and deal with psychological issues at clinical level.\n\nI have diverse cross cultural life experiences with virtue of living in five countries and nurturing human relationships with multiple ethnicities. This rich blend of education and personal journey has shaped my understanding of people's challenges across diverse communities.\n\nThese experiences have highlighted the pervasive stigma around mental health in many communities. My passion lies in breaking down this stigma and offering support to those who feel lost or in need.",
+  "aboutBody": "I am pleased to present myself as a dedicated psychotherapist based in Canada. A unique combination of my qualifications including a master's degree in counselling psychology (MACP) from Yorkville University, a Bachelor of Arts in Psychology, and a Bachelor of Science in Pharmacy enables me to understand and deal with psychological issues at clinical level. I have diverse cross cultural life experiences with virtue of living in five countries and nurturing human relationships with multiple ethnicities. This rich blend of education and personal journey has shaped my understanding of people's challenges across diverse communities. This lifelong journey of cultural intersectionality has also fueled my dedication to carving out my identity and understanding the diverse challenges people face. These experiences have highlighted the pervasive stigma around mental health in many communities. My passion lies in breaking down this stigma and offering support to those who feel lost or in need",
+  "aboutButtonText": "Learn About My Approach and More",
+  "aboutButtonLink": "/my-approach",
+  "connectLinks": [
+    { "label": "Watch my video at YouTube", "url": "https://www.youtube.com/watch?v=M3drdL08sy8", "icon": "fab fa-youtube" },
+    { "label": "Meet me at AKs", "url": "https://www.akstherapy.ca/about-5-2", "icon": "fas fa-building" },
+    { "label": "Meet me at JaneApp", "url": "https://voiceawareness.janeapp.com/#staff_member/1", "icon": "fas fa-user-md" },
+    { "label": "Read my article at First Session", "url": "https://www.firstsession.com/resources/south-asian-therapist", "icon": "fas fa-file-alt" },
+    { "label": "Meet me at Psychology Today", "url": "https://www.psychologytoday.com/ca/therapists/nayab-tahir-richmond-hill-on/1395672", "icon": "fas fa-book" },
+    { "label": "Meet me at First Session", "url": "https://www.firstsession.com/therapists/nayab-tahir", "icon": "fas fa-user" },
+    { "label": "Connect with me at LinkedIn", "url": "https://www.linkedin.com/in/nayab-tahir-93920778/?originalSubdomain=ca", "icon": "fab fa-linkedin" }
+  ],
   "servicesTitle": "My Services",
-  "servicesIntro": "Feeling trapped in darkness is a common human experience, but it doesn't have to be permanent. By understanding the root causes of your feelings, engaging in self-discovery, and seeking the support you need, you can find your way back to light and purpose. Don't hesitate to book a free consultation and let me tailor my services to your unique situation.",
+  "servicesIntro": "Feeling trapped in darkness is a common human experience, but it doesn't have to be permanent. By understanding the root causes of your feelings, engaging in self-discovery, and seeking the support you need, you can find your way back to light and purpose. Don't give up—Don't hesitate to book a free consultation with me and let me tailor my services to your unique situation and help you uncover your best self.",
   "audienceTitle": "Who Our Counseling Services Are For",
   "audienceIntro": "Our psychotherapy services may be a good fit if you are:",
   "audienceItems": [
@@ -18,7 +31,11 @@
     "Seeking behavioral health counseling",
     "Looking for a licensed psychotherapist in Ontario"
   ],
+  "audienceFooter": "Clients do not need to be in crisis to begin therapy. Many people seek counseling as a proactive step toward improved emotional well-being, personal growth, and balance in daily life.",
+  "registeredTitle": "Working With a Registered Psychotherapist",
+  "registeredBody": "Working with a Registered Psychotherapist provides a confidential and professional space to explore thoughts, emotions, and patterns without judgment. Therapy is collaborative and client-led, meaning you remain in control of the pace, focus, and depth of sessions.\n\nIn accordance with professional standards, therapy is conducted within clearly defined ethical and clinical boundaries. Informed consent, respect for autonomy, and emotional safety are prioritized throughout the therapeutic process.",
   "approachesTitle": "Therapeutic Approaches",
+  "approachesIntro": "Our psychotherapy services integrate evidence-based and trauma-informed approaches, which may include:",
   "approachesItems": [
     "Cognitive Behavioural Therapy (CBT)",
     "Dialectical Behaviour Therapy (DBT)",
@@ -27,7 +44,10 @@
     "Brain spotting",
     "Mindfulness-based and nervous-system-focused interventions"
   ],
-  "faqsTitle": "FAQs",
+  "approachesFooter": "Approaches are selected based on individual needs and adjusted over time as therapy progresses. Therapy is not one-size-fits-all, and techniques are used flexibly rather than rigidly.",
+  "jurisdictionTitle": "Therapy Services & Jurisdiction",
+  "jurisdictionBody": "Often times you may want to know which councillor near me or which counseling services near me are available. VoiceAwareness Psychotherapy provides psychotherapy and counseling services to clients located in Ontario and, where permitted, to individuals located in other jurisdictions through secure virtual therapy.\n\nAvailability of services outside Ontario is subject to regulatory requirements of the client's location. Clients are encouraged to inquire regarding eligibility for services prior to booking.",
+  "faqsTitle": "FAQS",
   "faqs": [
     {
       "question": "Do you offer virtual psychotherapy in Ontario?",
@@ -35,23 +55,43 @@
     },
     {
       "question": "Can you see clients outside of Ontario?",
-      "answer": "Psychotherapy services may be available to clients located outside Ontario where virtual psychotherapy is permitted by the regulatory requirements of the client's jurisdiction. Availability is assessed on a case-by-case basis."
+      "answer": "Psychotherapy services may be available to clients located outside Ontario where virtual psychotherapy is permitted by the regulatory requirements of the client's jurisdiction. Availability is assessed on a case-by-case basis, and clients are encouraged to inquire prior to booking."
     },
     {
-      "question": "How do I know if psychotherapy is right for me?",
-      "answer": "A consultation can help determine whether psychotherapy aligns with your needs and goals. Therapy is a collaborative process, and fit is an important part of effective care. Book a free consultation and I will guide you."
+      "question": "How do I know if psychotherapy near me is available and right for me?",
+      "answer": "A consultation can help determine whether psychotherapy aligns with your needs and goals. However, first thing to explore for anyone in the need is to see which therapist or counselling near me is available. I am here to help since therapy is a collaborative process, and fit is an important part of effective care. Book a free consultation and I will guide you."
     },
     {
       "question": "What is Online Therapy for Trauma?",
-      "answer": "Online Therapy for Trauma offers remote help to individuals facing emotional distress from past experiences. Using secure video conferencing tools, our therapists provide a safe space for you to explore and understand your feelings."
+      "answer": "Online Therapy for Trauma offers remote help to individuals facing emotional distress from past adventures. Using secure video conferencing tools, our therapists provide a safe space for you to explore and understand your feelings, fostering healing without the need to travel."
+    },
+    {
+      "question": "How do Personalized Online Therapy Sessions work?",
+      "answer": "Every session is tailored to fulfill your unique moving and psychological needs. Our therapists use a variety of techniques to address unique challenges, ensuring therapy aligns with your individual healing journey and life goals."
     },
     {
       "question": "What are the benefits of Stress Management Therapy?",
       "answer": "Stress Control Therapy helps you manage daily stressors and improve your mental and physical health. Our experienced psychotherapists teach you relaxation and resiliency skills to improve your quality of life."
     },
     {
+      "question": "Can EMDR Therapy Services for Youth help with anxiety?",
+      "answer": "Eye Movement Desensitization and Reprocessing has transformed youth anxiety and trauma treatment. This therapy helps resolve traumatic experiences, improving emotional stability."
+    },
+    {
       "question": "What distinguishes your Online Psychotherapy Services?",
-      "answer": "We provide client-oriented services. That implies reviewing and understanding the individual needs free of cost, and then engineering our therapy techniques to suit the client's needs and budgets."
+      "answer": "We provide client-oriented services. That implies reviewing and understanding the individual needs free of cost, and then engineer our therapy techniques to suit client's needs and budgets."
     }
-  ]
+  ],
+  "contactPsychologyHeading": "CONTACT ME AT PSYCHOLGYTODAY",
+  "contactPhoneHeading": "Call Toll Free at (1) 800 857 0609 OR send a message below",
+  "images": {
+    "heroSession": "/images/hero-session.webp",
+    "heroPortrait": "/images/hero-portrait.webp",
+    "aboutPortrait": "/images/about-nayab.webp",
+    "audience": "/images/audience-therapy.jpg",
+    "registered": "/images/registered-psychotherapy.jpg",
+    "approaches": "/images/approaches-therapy.jpg",
+    "jurisdiction": "/images/jurisdiction-couple.jpg",
+    "approachesAlt": "/images/approaches-couple.jpg"
+  }
 }

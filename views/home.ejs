@@ -6,133 +6,224 @@
 <body class="page-home">
   <%- include('partials/header') %>
 
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <p class="eyebrow"><%= home.heroEyebrow %></p>
-      <h1><%= home.heroTitle %></h1>
-      <% home.heroLead.split('\n\n').forEach(function(p) { %>
-        <p class="lead"><%= p %></p>
-      <% }); %>
-      <div class="hero-actions">
-        <a href="<%= site.janeApp %>" class="btn btn-primary" target="_blank" rel="noopener">Book a free consultation</a>
-        <a href="/my-approach" class="btn btn-outline">Learn about my approach</a>
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h2 class="hero-eyebrow"><%= home.heroEyebrow %></h2>
+        <h1><%= home.heroTitle %></h1>
+        <% home.heroLead.split('\n\n').forEach(function(p) { %>
+          <p><%- p.replace('VoiceAwareness Psychotherapy', '<strong>VoiceAwareness Psychotherapy</strong>') %></p>
+        <% }); %>
+        <a href="<%= home.heroButtonLink %>" class="btn btn-primary"><%= home.heroButtonText %></a>
+      </div>
+      <div class="hero-visual">
+        <img src="<%= home.images.heroPortrait %>" alt="Online Trauma Therapy Services" class="hero-portrait" width="486" height="730" loading="eager" />
+        <% if (home.images.heroSession) { %>
+          <img src="<%= home.images.heroSession %>" alt="Psychotherapy Counseling Services" class="hero-session" width="231" height="154" loading="eager" />
+        <% } %>
       </div>
     </div>
   </section>
 
   <section class="section about-section" id="about">
-    <div class="container split-grid">
-      <div class="about-visual">
-        <div class="portrait-frame">
-          <img src="/images/nayab-portrait.webp" alt="<%= site.owner %>, Registered Psychotherapist" loading="lazy" onerror="this.src='/images/portrait-placeholder.svg'" />
-        </div>
-      </div>
-      <div>
+    <div class="container about-grid">
+      <div class="about-copy">
         <p class="section-label">About</p>
         <h2><%= home.aboutTitle %></h2>
-        <h3 class="subtitle"><%= home.aboutSubtitle %></h3>
-        <% home.aboutBody.split('\n\n').forEach(function(p) { %>
-          <p><%= p %></p>
-        <% }); %>
-        <div class="connect-links">
-          <a href="<%= site.youtube %>" target="_blank" rel="noopener">YouTube</a>
-          <a href="<%= site.janeApp %>" target="_blank" rel="noopener">Jane App</a>
-          <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener">Psychology Today</a>
-          <a href="<%= site.firstSession %>" target="_blank" rel="noopener">First Session</a>
-          <a href="<%= site.linkedin %>" target="_blank" rel="noopener">LinkedIn</a>
+        <h4 class="about-subtitle"><strong><%= home.aboutSubtitle %></strong></h4>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p><%= home.aboutBody %></p>
+        <h3><strong>Connect with Me</strong></h3>
+        <div class="contact-links">
+          <% (home.connectLinks || []).forEach(function(link) { %>
+            <span>
+              <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer">
+                <i class="<%= link.icon %>"></i> <%= link.label %>
+              </a>
+            </span>
+          <% }); %>
         </div>
+        <a href="<%= home.aboutButtonLink %>" class="btn btn-primary"><%= home.aboutButtonText %></a>
+      </div>
+      <div class="about-visual">
+        <img src="<%= home.images.aboutPortrait %>" alt="<%= site.owner %> | Stress Management Therapy" loading="lazy" />
       </div>
     </div>
   </section>
 
   <section class="section services-section" id="services">
-    <div class="container">
-      <p class="section-label">Services</p>
-      <h2><%= home.servicesTitle %></h2>
-      <p class="section-intro"><%= home.servicesIntro %></p>
-      <div class="services-grid">
-        <% (site.services || []).forEach(function(service) { %>
-          <article class="service-card">
-            <% if (service.image) { %>
-              <img src="<%= service.image %>" alt="" class="service-card-image" loading="lazy" />
-            <% } %>
-            <h3><a href="<%= service.path %>"><%= service.title %></a></h3>
-            <p><%= service.summary %></p>
-            <a href="<%= service.path %>" class="text-link">Learn more</a>
+    <div class="container services-layout">
+      <div class="services-intro-col">
+        <p class="section-label center-label">Services</p>
+        <h2><%= home.servicesTitle %></h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p><%= home.servicesIntro %></p>
+      </div>
+      <div class="services-blurbs-col">
+        <% (site.services || []).slice(0, 2).forEach(function(service) { %>
+          <article class="service-blurb">
+            <div class="service-blurb-icon"><i class="fas <%= service.icon %>"></i></div>
+            <div>
+              <h4><%= service.title %></h4>
+              <p><%= service.summary %></p>
+              <a href="<%= service.path %>" class="learn-more">Learn More</a>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+      <div class="services-blurbs-col">
+        <% (site.services || []).slice(2).forEach(function(service) { %>
+          <article class="service-blurb">
+            <div class="service-blurb-icon"><i class="fas <%= service.icon %>"></i></div>
+            <div>
+              <h4><%= service.title %></h4>
+              <p><%= service.summary %></p>
+              <a href="<%= service.path %>" class="learn-more">Learn More</a>
+            </div>
           </article>
         <% }); %>
       </div>
     </div>
-  </section>
 
-  <section class="section muted-section">
-    <div class="container two-col">
+    <div class="container split-row">
       <div>
-        <h2><%= home.audienceTitle %></h2>
+        <h3><strong><%= home.audienceTitle %></strong></h3>
         <p><%= home.audienceIntro %></p>
+        <ul class="bullet-list">
+          <% (home.audienceItems || []).forEach(function(item) { %>
+            <li><%= item %></li>
+          <% }); %>
+        </ul>
+        <p><%= home.audienceFooter %></p>
       </div>
-      <ul class="check-list">
-        <% (home.audienceItems || []).forEach(function(item) { %>
-          <li><%= item %></li>
-        <% }); %>
-      </ul>
+      <div class="split-image">
+        <img src="<%= home.images.audience %>" alt="" loading="lazy" />
+      </div>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container two-col">
-      <div>
-        <h2>Working With a Registered Psychotherapist</h2>
-        <p>Working with a Registered Psychotherapist provides a confidential and professional space to explore thoughts, emotions, and patterns without judgment. Therapy is collaborative and client-led, meaning you remain in control of the pace, focus, and depth of sessions.</p>
-        <p>In accordance with professional standards, therapy is conducted within clearly defined ethical and clinical boundaries. Informed consent, respect for autonomy, and emotional safety are prioritized throughout the therapeutic process.</p>
+    <div class="container split-row reverse">
+      <div class="split-image">
+        <img src="<%= home.images.registered %>" alt="" loading="lazy" />
       </div>
       <div>
-        <h2><%= home.approachesTitle %></h2>
-        <ul class="check-list">
+        <h3><strong><%= home.registeredTitle %></strong></h3>
+        <% home.registeredBody.split('\n\n').forEach(function(p) { %>
+          <p><%= p %></p>
+        <% }); %>
+      </div>
+    </div>
+
+    <div class="container split-row">
+      <div>
+        <h3><strong><%= home.approachesTitle %></strong></h3>
+        <p><%= home.approachesIntro %></p>
+        <ul class="bullet-list">
           <% (home.approachesItems || []).forEach(function(item) { %>
             <li><%= item %></li>
           <% }); %>
         </ul>
+        <p><%= home.approachesFooter %></p>
+      </div>
+      <div class="split-image">
+        <img src="<%= home.images.approaches %>" alt="" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="container split-row reverse">
+      <div class="split-image">
+        <img src="<%= home.images.jurisdiction %>" alt="" loading="lazy" />
+      </div>
+      <div>
+        <h3><strong><%= home.jurisdictionTitle %></strong></h3>
+        <% home.jurisdictionBody.split('\n\n').forEach(function(p) { %>
+          <p><%= p %></p>
+        <% }); %>
+      </div>
+    </div>
+
+    <div class="container split-row">
+      <div>
+        <h3><strong><%= home.approachesTitle %></strong></h3>
+        <p><%= home.approachesIntro %></p>
+        <ul class="bullet-list">
+          <% (home.approachesItems || []).forEach(function(item) { %>
+            <li><%= item %></li>
+          <% }); %>
+        </ul>
+        <p><%= home.approachesFooter %></p>
+      </div>
+      <div class="split-image">
+        <img src="<%= home.images.approachesAlt %>" alt="" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <section class="section faq-section" id="faqs">
+  <section class="section faq-section">
     <div class="container">
-      <h2><%= home.faqsTitle %></h2>
-      <div class="faq-list">
+      <h2 class="faq-heading"><%= home.faqsTitle %></h2>
+      <div class="faq-accordion">
         <% (home.faqs || []).forEach(function(faq, i) { %>
-          <details class="faq-item" <%= i === 0 ? 'open' : '' %>>
-            <summary><%= faq.question %></summary>
-            <p><%= faq.answer %></p>
-          </details>
+          <div class="faq-toggle<%= i === 0 ? ' open' : '' %>">
+            <button type="button" class="faq-question" aria-expanded="<%= i === 0 ? 'true' : 'false' %>">
+              <%= faq.question %>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p><%= faq.answer %></p>
+            </div>
+          </div>
         <% }); %>
       </div>
     </div>
   </section>
 
-  <section class="section contact-section" id="contact">
-    <div class="container contact-grid">
-      <div>
-        <h2>Contact Me</h2>
-        <p>Call toll free at <a href="tel:<%= site.phoneTel %>"><%= site.phone %></a> or send a message below.</p>
-        <p>You can also find me on <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener">Psychology Today</a>.</p>
+  <section class="section contact-section" id="bookafreeconsulation">
+    <div class="container contact-layout">
+      <div class="contact-copy">
+        <h2>
+          <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener noreferrer"><%= home.contactPsychologyHeading %></a>
+        </h2>
+        <h2 class="contact-phone-heading"><%= home.contactPhoneHeading %></h2>
+        <form class="contact-form" method="post" action="/contact">
+          <div class="form-row">
+            <label>
+              <span class="sr-only">First name</span>
+              <input type="text" name="firstName" placeholder="First name" required />
+            </label>
+            <label>
+              <span class="sr-only">Last name</span>
+              <input type="text" name="lastName" placeholder="Last name" required />
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              <span class="sr-only">Email Address</span>
+              <input type="email" name="email" placeholder="Email Address" required />
+            </label>
+            <label>
+              <span class="sr-only">Phone</span>
+              <input type="tel" name="phone" placeholder="Phone" />
+            </label>
+          </div>
+          <label>
+            <span class="sr-only">Message</span>
+            <textarea name="message" rows="5" placeholder="Type your message here..." required></textarea>
+          </label>
+          <fieldset class="radio-group">
+            <legend>Are you located in Ontario, CA?*</legend>
+            <label><input type="radio" name="inOntario" value="yes" required /> Yes</label>
+            <label><input type="radio" name="inOntario" value="no" /> No</label>
+          </fieldset>
+          <div class="form-footer">
+            <p class="captcha-row">
+              <span>7 + 10</span> =
+              <input type="text" name="captcha" inputmode="numeric" pattern="17" title="Answer: 17" required autocomplete="off" />
+            </p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
       </div>
-      <form class="contact-form" method="post" action="/contact">
-        <div class="form-row">
-          <label>First name <input type="text" name="firstName" required /></label>
-          <label>Last name <input type="text" name="lastName" required /></label>
-        </div>
-        <label>Email <input type="email" name="email" required /></label>
-        <label>Phone <input type="tel" name="phone" /></label>
-        <label>Message <textarea name="message" rows="5" required></textarea></label>
-        <label class="checkbox-label">
-          <input type="checkbox" name="inOntario" value="yes" />
-          Are you located in Ontario, CA?
-        </label>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      <div class="contact-visual" aria-hidden="true"></div>
     </div>
   </section>
 
