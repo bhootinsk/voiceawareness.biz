@@ -71,6 +71,14 @@ app.use((err, req, res, _next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`voiceawareness.biz running on http://localhost:${PORT}`);
-});
+// Plesk runs Node via Phusion Passenger (use Restart App / tmp/restart.txt).
+// Local dev and manual `node app.js` still bind to PORT.
+if (typeof PhusionPassenger !== 'undefined') {
+  app.listen('passenger');
+} else if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`voiceawareness.biz running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

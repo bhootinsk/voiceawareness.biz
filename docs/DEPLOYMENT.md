@@ -196,13 +196,16 @@ Expected `/deploy-check` response:
 
 ## Updating the site later
 
+See **[PLESK-STARTUP.md](./PLESK-STARTUP.md)** for Plesk **Restart App**, `tmp/restart.txt`, and startup after reboot.
+
 ```bash
-cd /var/www/vhosts/voiceawareness.biz
-git pull origin main
+cd /var/www/vhosts/voiceawareness.biz/httpdocs
+export PATH=/opt/plesk/node/24/bin:$PATH
 npm install --production
+mkdir -p tmp && touch tmp/restart.txt
 ```
 
-Then **Restart App** in Plesk Node.js (or use Plesk Git auto-deploy if configured).
+Or use **Node.js → Restart App** in Plesk after deploying files.
 
 ---
 
