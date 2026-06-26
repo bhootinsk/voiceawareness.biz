@@ -31,17 +31,10 @@ trim_token() {
 
 load_github_token() {
   local file="$1"
-  local line=""
   if [ ! -f "$file" ]; then
     return 1
   fi
-  line=$(grep -a 'GITHUB_TOKEN' "$file" | tail -1 | sed 's/^\xEF\xBB\xBF//' | tr -d '\r')
-  line="${line#GITHUB_TOKEN=}"
-  line="${line#export GITHUB_TOKEN=}"
-  if [ -z "$line" ] || [ "$line" = "$(grep -a 'GITHUB_TOKEN' "$file" | tail -1 | tr -d '\r')" ]; then
-    line=$(sed 's/.*GITHUB_TOKEN=//' "$file" | tr -d '\r\n')
-  fi
-  trim_token "$line"
+  trim_token "$(sed 's/.*GITHUB_TOKEN=//' "$file" | tr -d '\r\n')"
 }
 
 GITHUB_TOKEN=$(load_github_token "$ENV_FILE")
