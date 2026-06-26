@@ -10,7 +10,9 @@
 
 set -e
 
-APP_DIR=/var/www/vhosts/voiceawareness.biz/httpdocs
+DOMAIN_ROOT=/var/www/vhosts/voiceawareness.biz
+APP_DIR="$DOMAIN_ROOT/httpdocs"
+CMS_ROOT="$DOMAIN_ROOT/private/cms"
 REPO=https://github.com/bhootinsk/voiceawareness.biz.git
 WORKDIR=/tmp/vab-cms-publish
 ENV_FILE=/root/vab-github.env
@@ -32,8 +34,13 @@ rm -rf "$WORKDIR"
 git clone "$REPO" "$WORKDIR"
 
 echo "==> Copying live CMS content"
-rsync -av "$APP_DIR/content/" "$WORKDIR/content/"
-rsync -av "$APP_DIR/data/" "$WORKDIR/data/"
+if [ -d "$CMS_ROOT/content" ]; then
+  rsync -av "$CMS_ROOT/content/" "$WORKDIR/content/"
+  rsync -av "$CMS_ROOT/data/" "$WORKDIR/data/"
+else
+  rsync -av "$APP_DIR/content/" "$WORKDIR/content/"
+  rsync -av "$APP_DIR/data/" "$WORKDIR/data/"
+fi
 
 cd "$WORKDIR"
 git add content data

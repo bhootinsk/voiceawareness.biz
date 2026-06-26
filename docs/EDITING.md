@@ -64,10 +64,16 @@ Avoid quotes unless needed. If the password contains `$`, wrap in single quotes 
 
 **4. Save fails with “cannot write content files”**
 
-SSH as root and run:
+Plesk often keeps `httpdocs/content/` owned by root. Move CMS storage to a writable private folder:
 
 ```bash
-bash /var/www/vhosts/voiceawareness.biz/scripts/fix-cms-permissions.sh
+bash /var/www/vhosts/voiceawareness.biz/scripts/deploy.sh
+```
+
+Or, if deploy is not an option yet, run the setup script directly (after pulling latest code):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bhootinsk/voiceawareness.biz/main/scripts/setup-cms-storage.sh | bash
 systemctl restart voiceawareness-biz
 ```
 
@@ -77,7 +83,7 @@ Verify:
 curl -s http://127.0.0.1:3000/deploy-check
 ```
 
-Look for `"homeJson":true` under `writable`.
+Look for `"homeJson":true` under `writable`, and `cmsPaths` pointing to `.../private/cms/...`.
 
 **Do not** run `git pull` inside `httpdocs` — it resets CMS files and breaks ownership. Use `deploy.sh` for code updates only.
 

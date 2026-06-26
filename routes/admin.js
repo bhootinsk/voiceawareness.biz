@@ -44,7 +44,7 @@ function saveOrFlash(req, res, redirectTo, saveFn, successMessage) {
     console.error(`Admin save failed (${redirectTo}):`, err);
     const hint =
       err.code === 'EACCES'
-        ? 'Server cannot write content files. SSH as root and run: bash /var/www/vhosts/voiceawareness.biz/scripts/fix-cms-permissions.sh'
+        ? 'Server cannot write content files. SSH as root and run: bash /var/www/vhosts/voiceawareness.biz/scripts/setup-cms-storage.sh'
         : err.message;
     setFlash(req, `Save failed: ${hint}`, 'error');
     res.redirect(redirectTo);

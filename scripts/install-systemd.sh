@@ -34,8 +34,8 @@ if [ -f "$APP_DIR/.env" ]; then
   chown voiceawarenessbiz:psacln "$APP_DIR/.env"
   chmod 640 "$APP_DIR/.env"
 fi
-echo "==> Fixing permissions for CMS writes"
-bash "$SCRIPT_DIR/fix-cms-permissions.sh"
+echo "==> Setting up CMS storage"
+bash "$SCRIPT_DIR/setup-cms-storage.sh"
 
 cp "$SERVICE_FILE" /etc/systemd/system/$SERVICE.service
 systemctl daemon-reload

@@ -67,6 +67,8 @@ app.get('/deploy-check', (_req, res) => {
     adminUsername: admin.username,
     adminEnvLoaded: admin.envFileReadable,
     writable: content.writableStatus(),
+    cmsPaths: content.contentPaths(),
+    processUid: typeof process.getuid === 'function' ? process.getuid() : null,
   });
 });
 

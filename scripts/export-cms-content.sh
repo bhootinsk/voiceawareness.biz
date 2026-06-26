@@ -1,17 +1,22 @@
 #!/bin/bash
 # Export live CMS content from the server (run as root on the server).
-# Creates a tarball you can download and import into the git repo.
 #
 # Usage:
 #   bash /var/www/vhosts/voiceawareness.biz/scripts/export-cms-content.sh
 
 set -e
 
-APP_DIR=/var/www/vhosts/voiceawareness.biz/httpdocs
+DOMAIN_ROOT=/var/www/vhosts/voiceawareness.biz
+APP_DIR="$DOMAIN_ROOT/httpdocs"
+CMS_ROOT="$DOMAIN_ROOT/private/cms"
 STAMP=$(date +%Y%m%d-%H%M%S)
 OUT=/root/vab-cms-export-$STAMP.tar.gz
 
-tar czf "$OUT" -C "$APP_DIR" content data
+if [ ! -d "$CMS_ROOT/content" ]; then
+  CMS_ROOT="$APP_DIR"
+fi
+
+tar czf "$OUT" -C "$CMS_ROOT" content data
 echo "Exported: $OUT"
 echo ""
 echo "Download to your PC (run on your machine):"

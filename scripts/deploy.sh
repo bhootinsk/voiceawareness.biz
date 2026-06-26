@@ -14,9 +14,10 @@ BACKUP_DIR=/root/vab-cms-backup
 echo "==> Backing up .env and CMS content"
 cp "$APP_DIR/.env" /root/vab.env.bak 2>/dev/null || true
 mkdir -p "$BACKUP_DIR"
-rm -rf "$BACKUP_DIR/content" "$BACKUP_DIR/data"
+rm -rf "$BACKUP_DIR/content" "$BACKUP_DIR/data" "$BACKUP_DIR/private-cms"
 [ -d "$APP_DIR/content" ] && cp -a "$APP_DIR/content" "$BACKUP_DIR/"
 [ -d "$APP_DIR/data" ] && cp -a "$APP_DIR/data" "$BACKUP_DIR/"
+[ -d "$DOMAIN_ROOT/private/cms" ] && cp -a "$DOMAIN_ROOT/private/cms" "$BACKUP_DIR/private-cms"
 
 echo "==> Fetching from GitHub"
 rm -rf /tmp/vab-update
@@ -42,8 +43,8 @@ cd "$APP_DIR"
 export PATH="$NODE_BIN:$PATH"
 npm install --production
 
-echo "==> Fixing permissions for CMS writes"
-bash "$DOMAIN_ROOT/scripts/fix-cms-permissions.sh"
+echo "==> Fixing CMS storage and permissions"
+bash "$DOMAIN_ROOT/scripts/setup-cms-storage.sh"
 
 echo "==> Restarting service"
 if systemctl is-enabled "$SERVICE" >/dev/null 2>&1; then
@@ -60,8 +61,8 @@ echo ""
 
 CHECK=$(curl -sf http://127.0.0.1:3000/deploy-check || echo '{}')
 if ! echo "$CHECK" | grep -q '"homeJson":true'; then
-  echo "WARNING: content/ is not writable by the app. Re-running permission fix..."
-  bash "$DOMAIN_ROOT/scripts/fix-cms-permissions.sh"
+  echo "WARNING: CMS files are not writable. Re-running setup..."
+  bash "$DOMAIN_ROOT/scripts/setup-cms-storage.sh"
   systemctl restart "$SERVICE"
   sleep 2
   curl -sf http://127.0.0.1:3000/deploy-check
