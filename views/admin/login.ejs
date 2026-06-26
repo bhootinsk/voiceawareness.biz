@@ -9,7 +9,7 @@
 <body class="admin-body">
   <main class="admin-main narrow">
     <h1>Admin Login</h1>
-    <% if (error) { %><p class="error">Invalid username or password.</p><% } %>
+    <% if (error) { %><p class="error">Invalid username or password. Use username <strong>admin</strong> (from deploy-check). Check <code>.env</code> <code>ADMIN_PASSWORD</code>.</p><% } %>
     <% if (sessionLost) { %><p class="notice">Please sign in to continue.</p><% } %>
     <form method="post" action="/admin/login" class="admin-form">
       <input type="hidden" name="redirect" value="<%= redirect %>" />
