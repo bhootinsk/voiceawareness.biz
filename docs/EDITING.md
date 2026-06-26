@@ -31,6 +31,44 @@ After changing `.env`, restart the app:
 systemctl restart voiceawareness-biz
 ```
 
+### Login still fails?
+
+**1. Check what the app actually uses** (safe — no password shown):
+
+```bash
+curl -s http://127.0.0.1:3000/deploy-check
+```
+
+Look for:
+
+- `"adminAuthSource": "env"` — using `.env` (good)
+- `"adminAuthSource": "default"` — `.env` not loaded; app uses `admin` / `VoiceAwareness2025!`
+- `"adminUsername"` — username the app expects
+
+**2. Fix `.env` permissions** (common issue — you read `.env` as root, app runs as `voiceawarenessbiz`):
+
+```bash
+chown voiceawarenessbiz:psacln /var/www/vhosts/voiceawareness.biz/httpdocs/.env
+chmod 640 /var/www/vhosts/voiceawareness.biz/httpdocs/.env
+systemctl restart voiceawareness-biz
+```
+
+**3. `.env` format** — no spaces around `=`, one variable per line:
+
+```env
+ADMIN_USERNAME=youruser
+ADMIN_PASSWORD=yourpassword
+```
+
+Avoid quotes unless needed. If the password contains `$`, wrap in single quotes in `.env` or change the password to avoid `$` (systemd can mangle `$` in `EnvironmentFile`).
+
+**4. Try the default** if `adminAuthSource` is `default`:
+
+- Username: `admin`
+- Password: `VoiceAwareness2025!`
+
+Then fix `.env` and restart.
+
 ---
 
 ## What you can change in admin (no deploy)

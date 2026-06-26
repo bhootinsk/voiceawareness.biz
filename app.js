@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 const path = require('path');
 const express = require('express');
@@ -7,6 +7,7 @@ const session = require('express-session');
 const publicRoutes = require('./routes/public');
 const adminRoutes = require('./routes/admin');
 const content = require('./lib/content');
+const { getAdminAuthStatus } = require('./lib/auth-config');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -48,11 +49,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/deploy-check', (_req, res) => {
+  const admin = getAdminAuthStatus();
   res.json({
     ok: true,
     site: content.getSite().domain,
     pages: content.listPages().map((p) => p.slug),
     nodeEnv: process.env.NODE_ENV || 'development',
+    adminAuthSource: admin.source,
+    adminUsername: admin.username,
+    adminEnvLoaded: admin.envFileReadable,
   });
 });
 

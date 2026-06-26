@@ -29,7 +29,11 @@ cd "$APP_DIR"
 export PATH="$NODE_BIN:$PATH"
 npm install --production
 
-echo "==> Installing systemd unit"
+echo "==> Fixing .env permissions for app user"
+if [ -f "$APP_DIR/.env" ]; then
+  chown voiceawarenessbiz:psacln "$APP_DIR/.env"
+  chmod 640 "$APP_DIR/.env"
+fi
 cp "$SERVICE_FILE" /etc/systemd/system/$SERVICE.service
 systemctl daemon-reload
 systemctl enable "$SERVICE"

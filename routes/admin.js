@@ -6,7 +6,7 @@ const multer = require('multer');
 const content = require('../lib/content');
 const { parseHomeLayout, mergeHomeLayout } = require('../lib/home-layout');
 const { requireAuth } = require('../middleware/auth');
-const { verifyAdminLogin, getAdminCredentials } = require('../lib/auth-config');
+const { verifyAdminLogin, getAdminCredentials, trimCredential } = require('../lib/auth-config');
 
 const router = express.Router();
 
@@ -68,12 +68,14 @@ router.post('/login', (req, res) => {
     const creds = getAdminCredentials();
     req.session.regenerate((err) => {
       if (err) {
+        console.error('Admin session regenerate failed:', err.message);
         return res.redirect(`/admin/login?error=1&redirect=${encodeURIComponent(target)}`);
       }
       req.session.authenticated = true;
       req.session.username = creds.username;
       req.session.save((saveErr) => {
         if (saveErr) {
+          console.error('Admin session save failed:', saveErr.message);
           return res.redirect(`/admin/login?error=1&redirect=${encodeURIComponent(target)}`);
         }
         res.redirect(target);
@@ -81,6 +83,7 @@ router.post('/login', (req, res) => {
     });
     return;
   }
+  console.warn('Admin login failed for username:', trimCredential(user) || '(empty)');
   res.redirect(`/admin/login?error=1&redirect=${encodeURIComponent(target)}`);
 });
 
