@@ -211,6 +211,16 @@ body.admin-body {
   color: #667;
 }
 
+.range-label output {
+  font-weight: 700;
+  color: var(--admin-accent);
+}
+
+.range-label input[type="range"] {
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
 .admin-links {
   padding-left: 1.2rem;
 }

@@ -18,6 +18,35 @@
         <label>Lead <textarea name="heroLead" rows="5"><%= home.heroLead %></textarea></label>
       </fieldset>
       <fieldset>
+        <legend>Hero layout (sliders)</legend>
+        <p class="help">Fine-tune spacing and sizes. Changes apply immediately after save — no deploy needed.</p>
+        <% const L = home.layout; %>
+        <label class="range-label">
+          Text block width <output id="out-heroCopyMaxWidth"><%= L.heroCopyMaxWidth %></output>px
+          <input type="range" name="heroCopyMaxWidth" min="420" max="680" step="10" value="<%= L.heroCopyMaxWidth %>" data-output="out-heroCopyMaxWidth" data-suffix="px" />
+        </label>
+        <label class="range-label">
+          Eyebrow font size <output id="out-heroEyebrowFontSize"><%= L.heroEyebrowFontSize %></output>px
+          <input type="range" name="heroEyebrowFontSize" min="24" max="40" step="1" value="<%= L.heroEyebrowFontSize %>" data-output="out-heroEyebrowFontSize" data-suffix="px" />
+        </label>
+        <label class="range-label">
+          Title font size <output id="out-heroTitleFontSize"><%= L.heroTitleFontSize %></output>px
+          <input type="range" name="heroTitleFontSize" min="48" max="80" step="1" value="<%= L.heroTitleFontSize %>" data-output="out-heroTitleFontSize" data-suffix="px" />
+        </label>
+        <label class="range-label">
+          Portrait image width <output id="out-heroImageMaxWidth"><%= L.heroImageMaxWidth %></output>px
+          <input type="range" name="heroImageMaxWidth" min="400" max="600" step="10" value="<%= L.heroImageMaxWidth %>" data-output="out-heroImageMaxWidth" data-suffix="px" />
+        </label>
+        <label class="range-label">
+          Gap between text and image <output id="out-heroGap"><%= L.heroGap %></output>rem
+          <input type="range" name="heroGap" min="1" max="4" step="0.5" value="<%= L.heroGap %>" data-output="out-heroGap" data-suffix="rem" />
+        </label>
+        <label class="range-label">
+          Booking button left padding <output id="out-heroButtonPaddingLeft"><%= L.heroButtonPaddingLeft %></output>px
+          <input type="range" name="heroButtonPaddingLeft" min="100" max="160" step="2" value="<%= L.heroButtonPaddingLeft %>" data-output="out-heroButtonPaddingLeft" data-suffix="px" />
+        </label>
+      </fieldset>
+      <fieldset>
         <legend>About Nayab</legend>
         <label>Title <input type="text" name="aboutTitle" value="<%= home.aboutTitle %>" /></label>
         <label>Subtitle <input type="text" name="aboutSubtitle" value="<%= home.aboutSubtitle %>" /></label>
@@ -44,5 +73,14 @@
       <button type="submit" class="btn btn-primary">Save home page</button>
     </form>
   </main>
+  <script>
+    document.querySelectorAll('input[type="range"][data-output]').forEach((input) => {
+      const output = document.getElementById(input.dataset.output);
+      const suffix = input.dataset.suffix || '';
+      const sync = () => { output.textContent = input.value + suffix; };
+      input.addEventListener('input', sync);
+      sync();
+    });
+  </script>
 </body>
 </html>

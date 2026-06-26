@@ -6,7 +6,7 @@
 <body class="page-home">
   <%- include('partials/header') %>
 
-  <section class="hero-section">
+  <section class="hero-section" style="--hero-copy-max-width: <%= home.layout.heroCopyMaxWidth %>px; --hero-eyebrow-size: <%= home.layout.heroEyebrowFontSize %>px; --hero-title-size: <%= home.layout.heroTitleFontSize %>px; --hero-image-max-width: <%= home.layout.heroImageMaxWidth %>px; --hero-gap: <%= home.layout.heroGap %>rem; --hero-button-padding-left: <%= home.layout.heroButtonPaddingLeft %>px;">
     <div class="container hero-grid">
       <div class="hero-copy">
         <h2 class="hero-eyebrow"><%= home.heroEyebrow %></h2>

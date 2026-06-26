@@ -20,7 +20,11 @@ npm start
 Open http://localhost:3000
 
 **Admin:** http://localhost:3000/admin  
-Default credentials (change in `.env`): `admin` / `VoiceAwareness2025!`
+
+Credentials: set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in `.env` (see `.env.example`).  
+If unset, defaults are `admin` / `VoiceAwareness2025!` — change before going live.
+
+On the server, credentials live in `httpdocs/.env`. See [docs/EDITING.md](docs/EDITING.md).
 
 ## Pages
 

@@ -4,6 +4,7 @@ const express = require('express');
 const multer = require('multer');
 
 const content = require('../lib/content');
+const { parseHomeLayout, mergeHomeLayout } = require('../lib/home-layout');
 const { requireAuth } = require('../middleware/auth');
 const { verifyAdminLogin, getAdminCredentials } = require('../lib/auth-config');
 
@@ -114,9 +115,10 @@ router.post('/site', requireAuth, (req, res) => {
 });
 
 router.get('/home', requireAuth, (req, res) => {
+  const home = content.getHome();
   res.render('admin/home-edit', {
     title: 'Edit Home Page',
-    home: content.getHome(),
+    home: { ...home, layout: mergeHomeLayout(home.layout) },
     ...adminLocals(req),
   });
 });
@@ -143,6 +145,7 @@ router.post('/home', requireAuth, (req, res) => {
       ? req.body.approachesItems.split('\n').map((s) => s.trim()).filter(Boolean)
       : home.approachesItems,
     faqsTitle: req.body.faqsTitle,
+    layout: parseHomeLayout(req.body, home.layout),
   };
 
   if (req.body.faqsJson) {

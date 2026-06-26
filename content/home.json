@@ -94,5 +94,13 @@
     "approaches": "/images/approaches-therapy.jpg",
     "jurisdiction": "/images/jurisdiction-couple.jpg",
     "approachesAlt": "/images/approaches-couple.jpg"
+  },
+  "layout": {
+    "heroCopyMaxWidth": 560,
+    "heroEyebrowFontSize": 32,
+    "heroTitleFontSize": 70,
+    "heroImageMaxWidth": 520,
+    "heroGap": 2.5,
+    "heroButtonPaddingLeft": 136
   }
 }

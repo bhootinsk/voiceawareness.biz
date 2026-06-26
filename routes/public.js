@@ -1,5 +1,6 @@
 const express = require('express');
 const content = require('../lib/content');
+const { mergeHomeLayout } = require('../lib/home-layout');
 
 const router = express.Router();
 
@@ -11,9 +12,10 @@ const SERVICE_SLUGS = [
 ];
 
 router.get('/', (req, res) => {
+  const home = content.getHome();
   res.render('home', {
     title: 'Psychotherapy Counseling Services',
-    home: content.getHome(),
+    home: { ...home, layout: mergeHomeLayout(home.layout) },
   });
 });
 
