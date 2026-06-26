@@ -38,6 +38,9 @@ load_github_token() {
   line=$(grep -a 'GITHUB_TOKEN' "$file" | tail -1 | sed 's/^\xEF\xBB\xBF//' | tr -d '\r')
   line="${line#GITHUB_TOKEN=}"
   line="${line#export GITHUB_TOKEN=}"
+  if [ -z "$line" ] || [ "$line" = "$(grep -a 'GITHUB_TOKEN' "$file" | tail -1 | tr -d '\r')" ]; then
+    line=$(sed 's/.*GITHUB_TOKEN=//' "$file" | tr -d '\r\n')
+  fi
   trim_token "$line"
 }
 
