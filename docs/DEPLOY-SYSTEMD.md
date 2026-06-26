@@ -38,16 +38,31 @@ plesk sbin httpdmng --reconfigure-domain voiceawareness.biz
 
 ## One-time server install (SSH as root)
 
-After code is in `httpdocs` and `.env` exists:
+**One command** (paste this single line only):
 
 ```bash
-cd /var/www/vhosts/voiceawareness.biz/httpdocs
-git clone https://github.com/bhootinsk/voiceawareness.biz.git /tmp/vab-setup
-cp -r /tmp/vab-setup/scripts /var/www/vhosts/voiceawareness.biz/
-bash /var/www/vhosts/voiceawareness.biz/scripts/install-systemd.sh
+curl -fsSL https://raw.githubusercontent.com/bhootinsk/voiceawareness.biz/main/scripts/server-bootstrap.sh | bash
 ```
 
-Or copy `scripts/` from your PC if Git fails.
+Before running: disable Plesk Node.js and set Apache proxy (see above).
+
+If `curl` fails, run commands **one at a time** (press Enter after each line):
+
+```bash
+git clone https://github.com/bhootinsk/voiceawareness.biz.git /tmp/vab-setup
+```
+
+```bash
+rsync -av /tmp/vab-setup/ /var/www/vhosts/voiceawareness.biz/httpdocs/ --exclude .env --exclude node_modules --exclude uploads --exclude .git
+```
+
+```bash
+cp -r /tmp/vab-setup/scripts /var/www/vhosts/voiceawareness.biz/
+```
+
+```bash
+bash /var/www/vhosts/voiceawareness.biz/scripts/install-systemd.sh
+```
 
 ---
 

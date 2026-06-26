@@ -8,6 +8,12 @@ APP_DIR=/var/www/vhosts/voiceawareness.biz/httpdocs
 NODE_BIN=/opt/plesk/node/24/bin
 SERVICE=voiceawareness-biz
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SERVICE_FILE="$SCRIPT_DIR/systemd/voiceawareness-biz.service"
+
+if [ ! -f "$SERVICE_FILE" ]; then
+  echo "Service file not found at $SERVICE_FILE"
+  exit 1
+fi
 
 if [ ! -x "$NODE_BIN/node" ]; then
   echo "Node not found at $NODE_BIN/node"
@@ -24,7 +30,7 @@ export PATH="$NODE_BIN:$PATH"
 npm install --production
 
 echo "==> Installing systemd unit"
-cp "$SCRIPT_DIR/systemd/voiceawareness-biz.service" /etc/systemd/system/$SERVICE.service
+cp "$SERVICE_FILE" /etc/systemd/system/$SERVICE.service
 systemctl daemon-reload
 systemctl enable "$SERVICE"
 systemctl restart "$SERVICE"
