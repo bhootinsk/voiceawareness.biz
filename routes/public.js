@@ -43,7 +43,7 @@ router.get('/blogs', (req, res) => {
 });
 
 router.get('/anxiety', (req, res) => {
-  const page = content.getPage('anxiety');
+  const page = content.getBlogPost('anxiety');
   if (!page) return res.status(404).render('404', { title: 'Not Found' });
   res.render('blog', { title: page.title, page });
 });

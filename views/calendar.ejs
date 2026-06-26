@@ -6,28 +6,44 @@
 <body class="page-inner page-calendar">
   <%- include('partials/header') %>
   <main class="page-main">
-    <section class="page-hero">
-      <div class="container page-hero-copy page-hero-copy--center">
-        <p class="section-label">Book online</p>
-        <h1><%= page.title %></h1>
-        <p class="page-intro">Schedule a free consultation or therapy session through Jane App — secure virtual and in-person appointments.</p>
+    <section class="page-hero page-hero--has-image">
+      <div class="container page-hero-grid">
+        <div class="page-hero-copy">
+          <p class="section-label">Book online</p>
+          <h1><%= page.title %></h1>
+          <p class="page-intro">Schedule a free consultation or therapy session through Jane App — secure virtual and in-person appointments.</p>
+        </div>
+        <div class="page-hero-image">
+          <img src="/images/calendar/booking-hero.jpg" alt="Book a therapy appointment" loading="eager" />
+        </div>
       </div>
     </section>
     <section class="section section--content">
       <div class="container booking-layout">
-        <div class="booking-embed">
-          <iframe src="<%= site.calendarUrl %>" title="Book an appointment on Jane App" loading="lazy"></iframe>
+        <div class="booking-panel">
+          <div class="booking-panel-visual">
+            <img src="/images/hero-session.webp" alt="Online therapy booking" loading="lazy" />
+          </div>
+          <div class="booking-panel-copy">
+            <h2>Book your appointment on Jane App</h2>
+            <p>Jane App handles scheduling securely — choose your service, pick a time, and complete a short intake form. Virtual and in-person sessions are available where eligible.</p>
+            <p class="booking-note-inline"><strong>Note:</strong> Booking opens in Jane App (it cannot be embedded on this page for security reasons).</p>
+            <div class="cta-panel-actions">
+              <a href="<%= site.janeApp %>" class="btn btn-primary" target="_blank" rel="noopener">Open Jane App to book</a>
+              <a href="tel:<%= site.phoneTel %>" class="btn btn-secondary">Call <%= site.phoneDisplay %></a>
+            </div>
+          </div>
         </div>
         <aside class="booking-aside">
-          <h2>Need help booking?</h2>
-          <p>Call <a href="tel:<%= site.phoneTel %>"><%= site.phoneDisplay %></a> or email <a href="mailto:<%= site.email %>"><%= site.email %></a>.</p>
+          <h2>How it works</h2>
           <ul class="booking-steps">
+            <li>Click <strong>Open Jane App to book</strong></li>
             <li>Choose a service or free consultation</li>
             <li>Pick a date and time that works for you</li>
             <li>Complete the short intake form</li>
           </ul>
-          <a href="<%= site.janeApp %>" class="btn btn-primary btn-block" target="_blank" rel="noopener">Open Jane App</a>
-          <a href="/#bookafreeconsulation" class="btn btn-secondary btn-block">Contact form</a>
+          <p>Questions? Email <a href="mailto:<%= site.email %>"><%= site.email %></a></p>
+          <a href="/#bookafreeconsulation" class="btn btn-secondary btn-block">Use contact form instead</a>
         </aside>
       </div>
       <% if (page.html) { %>

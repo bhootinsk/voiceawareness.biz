@@ -1,4 +1,4 @@
-<% const heroImage = page.heroImage || page.featuredImage; %>
+<% const heroImage = page.heroImage || page.featuredImage || (page.slug === 'anxiety' ? '/images/blog/anxiety-featured.webp' : ''); %>
 <% const heroLabel = page.type === 'blog' ? 'Blog' : (typeof heroLabelOverride !== 'undefined' ? heroLabelOverride : ''); %>
 <section class="page-hero<%= heroImage ? ' page-hero--has-image' : '' %>">
   <div class="container page-hero-grid">
