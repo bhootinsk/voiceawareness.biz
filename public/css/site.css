@@ -342,9 +342,26 @@ p {
   align-items: start;
 }
 
+.about-section h2,
+.about-section h3,
+.about-section h4,
+.services-section h2,
+.services-section h3,
+.services-section h4 {
+  font-family: var(--font-heading);
+}
+
+.about-section p,
+.services-intro-col p,
+.split-row p {
+  font-family: var(--font-hero-body);
+  font-size: 16px;
+}
+
 .about-subtitle {
   margin: 0.5rem 0 0;
   font-weight: 400;
+  font-family: var(--font-heading);
 }
 
 .contact-links {
