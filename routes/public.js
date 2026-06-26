@@ -44,6 +44,12 @@ router.get('/blogs', (req, res) => {
   res.render('page', { title: page.title, page });
 });
 
+router.get('/anxiety', (req, res) => {
+  const page = content.getPage('anxiety');
+  if (!page) return res.status(404).render('404', { title: 'Not Found' });
+  res.render('page', { title: page.title, page });
+});
+
 router.get('/calendar', (req, res) => {
   const page = content.getPage('calendar');
   if (!page) return res.status(404).render('404', { title: 'Not Found' });
