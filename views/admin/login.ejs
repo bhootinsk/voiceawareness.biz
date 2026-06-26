@@ -10,7 +10,7 @@
   <main class="admin-main narrow">
     <h1>Admin Login</h1>
     <% if (error) { %><p class="error">Invalid username or password. Use username <strong>admin</strong> (from deploy-check). Check <code>.env</code> <code>ADMIN_PASSWORD</code>.</p><% } %>
-    <% if (sessionLost) { %><p class="notice">Please sign in to continue.</p><% } %>
+    <% if (sessionLost) { %><p class="error">Your session was not saved. Sign in again. If this keeps happening, ask your host to add <code>X-Forwarded-Proto</code> on the Apache proxy.</p><% } %>
     <form method="post" action="/admin/login" class="admin-form">
       <input type="hidden" name="redirect" value="<%= redirect %>" />
       <label>Username <input type="text" name="user" autocomplete="username" required /></label>

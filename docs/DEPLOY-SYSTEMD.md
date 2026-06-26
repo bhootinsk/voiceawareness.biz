@@ -21,10 +21,14 @@ Node binary: **`/opt/plesk/node/24/bin/node`** (v24.17.0 on this server).
 ```apache
 <IfModule mod_proxy.c>
   ProxyPreserveHost On
+  RequestHeader set X-Forwarded-Proto "https"
+  RequestHeader set X-Forwarded-Port "443"
   ProxyPass / http://127.0.0.1:3000/
   ProxyPassReverse / http://127.0.0.1:3000/
 </IfModule>
 ```
+
+`X-Forwarded-Proto` is required so admin login can set the session cookie over HTTPS. Without it, sign-in succeeds but the page reloads with an empty form (no error).
 
 4. Ensure `httpdocs/.htaccess` has **no** `ProxyPass` (comments only).
 

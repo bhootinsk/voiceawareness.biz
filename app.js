@@ -17,7 +17,15 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 if (isProduction) {
-  app.set('trust proxy', 1);
+  app.set('trust proxy', true);
+  // Plesk Apache terminates TLS and proxies to Node over HTTP. express-session only
+  // sends the session cookie when req.secure is true (needs X-Forwarded-Proto).
+  app.use((req, _res, next) => {
+    if (!req.get('x-forwarded-proto')) {
+      req.headers['x-forwarded-proto'] = 'https';
+    }
+    next();
+  });
 }
 
 app.use(express.urlencoded({ extended: true }));
@@ -30,7 +38,7 @@ app.use(
     saveUninitialized: false,
     proxy: isProduction,
     cookie: {
-      secure: isProduction,
+      secure: isProduction ? 'auto' : false,
       httpOnly: true,
       sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000,
