@@ -17,9 +17,13 @@
         <a href="<%= home.heroButtonLink %>" class="btn btn-primary"><%= home.heroButtonText %></a>
       </div>
       <div class="hero-visual">
-        <img src="<%= home.images.heroPortrait %>" alt="Online Trauma Therapy Services" class="hero-portrait" width="486" height="730" loading="eager" />
+        <div class="hero-portrait-wrap">
+          <img src="<%= home.images.heroPortrait %>" alt="Online Trauma Therapy Services" class="hero-portrait" width="486" height="730" loading="eager" />
+        </div>
         <% if (home.images.heroSession) { %>
-          <img src="<%= home.images.heroSession %>" alt="Psychotherapy Counseling Services" class="hero-session" width="231" height="154" loading="eager" />
+          <div class="hero-session-wrap">
+            <img src="<%= home.images.heroSession %>" alt="Psychotherapy Counseling Services" class="hero-session" width="231" height="154" loading="eager" />
+          </div>
         <% } %>
       </div>
     </div>
