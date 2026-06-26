@@ -1,0 +1,18 @@
+[Unit]
+Description=voiceawareness.biz Node.js application
+After=network.target
+
+[Service]
+Type=simple
+User=voiceawarenessbiz
+Group=psacln
+WorkingDirectory=/var/www/vhosts/voiceawareness.biz/httpdocs
+Environment=NODE_ENV=production
+Environment=PATH=/opt/plesk/node/24/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+EnvironmentFile=-/var/www/vhosts/voiceawareness.biz/httpdocs/.env
+ExecStart=/opt/plesk/node/24/bin/node app.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
