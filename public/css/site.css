@@ -204,10 +204,14 @@ p {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+  gap: 2.5rem;
   align-items: center;
   width: 100%;
+}
+
+.hero-copy {
+  max-width: 480px;
 }
 
 .hero-eyebrow {
@@ -252,7 +256,7 @@ p {
 }
 
 .hero-portrait-wrap {
-  width: min(486px, 100%);
+  width: min(520px, 100%);
   margin-left: auto;
   margin-right: 0;
 }
@@ -788,6 +792,10 @@ p {
 
   .page-home .hero-section .btn-primary {
     padding-left: 122px;
+  }
+
+  .hero-copy {
+    max-width: none;
   }
 
   .hero-grid,
