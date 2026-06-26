@@ -14,14 +14,15 @@ if [ ! -f "$FILE" ]; then
 fi
 
 echo "File: $FILE ($(wc -c < "$FILE") bytes)"
-echo "Hex (first line):"
-xxd "$FILE" | head -2
+echo "Hex:"
+xxd "$FILE" | head -3
 
-TOKEN=$(sed 's/.*GITHUB_TOKEN=//' "$FILE" | tr -d '\r\n"'"' ')
+TOKEN=$(cut -d= -f2- "$FILE" | tr -d '\r\n')
 echo "Token length: ${#TOKEN}"
 
 if [ "${#TOKEN}" -eq 0 ]; then
-  echo "ERROR: Could not read token from file."
+  echo "ERROR: Could not read token. File should be one line:"
+  echo "  GITHUB_TOKEN=ghp_your_token"
   exit 1
 fi
 

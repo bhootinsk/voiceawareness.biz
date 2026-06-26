@@ -34,7 +34,7 @@ load_github_token() {
   if [ ! -f "$file" ]; then
     return 1
   fi
-  trim_token "$(sed 's/.*GITHUB_TOKEN=//' "$file" | tr -d '\r\n')"
+  trim_token "$(cut -d= -f2- "$file" | tr -d '\r\n')"
 }
 
 GITHUB_TOKEN=$(load_github_token "$ENV_FILE")
