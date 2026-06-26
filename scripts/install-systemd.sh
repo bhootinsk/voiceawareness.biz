@@ -35,8 +35,7 @@ if [ -f "$APP_DIR/.env" ]; then
   chmod 640 "$APP_DIR/.env"
 fi
 echo "==> Fixing permissions for CMS writes"
-chown -R voiceawarenessbiz:psacln "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
-chmod -R u+rwX "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
+bash "$SCRIPT_DIR/fix-cms-permissions.sh"
 
 cp "$SERVICE_FILE" /etc/systemd/system/$SERVICE.service
 systemctl daemon-reload

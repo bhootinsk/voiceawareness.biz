@@ -33,14 +33,17 @@ rsync -av /tmp/vab-update/ "$APP_DIR/" \
 
 cp /root/vab.env.bak "$APP_DIR/.env" 2>/dev/null || true
 
+echo "==> Updating deploy scripts"
+rsync -av /tmp/vab-update/scripts/ "$DOMAIN_ROOT/scripts/"
+chmod +x "$DOMAIN_ROOT/scripts/"*.sh
+
 echo "==> Installing dependencies"
 cd "$APP_DIR"
 export PATH="$NODE_BIN:$PATH"
 npm install --production
 
 echo "==> Fixing permissions for CMS writes"
-chown -R voiceawarenessbiz:psacln "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
-chmod -R u+rwX "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
+bash "$DOMAIN_ROOT/scripts/fix-cms-permissions.sh"
 
 echo "==> Restarting service"
 if systemctl is-enabled "$SERVICE" >/dev/null 2>&1; then
@@ -54,5 +57,16 @@ sleep 2
 echo "==> Health check"
 curl -sf http://127.0.0.1:3000/deploy-check
 echo ""
+
+CHECK=$(curl -sf http://127.0.0.1:3000/deploy-check || echo '{}')
+if ! echo "$CHECK" | grep -q '"homeJson":true'; then
+  echo "WARNING: content/ is not writable by the app. Re-running permission fix..."
+  bash "$DOMAIN_ROOT/scripts/fix-cms-permissions.sh"
+  systemctl restart "$SERVICE"
+  sleep 2
+  curl -sf http://127.0.0.1:3000/deploy-check
+  echo ""
+fi
+
 echo "Done. https://www.voiceawareness.biz/"
 echo "CMS content/data on the server were not changed."

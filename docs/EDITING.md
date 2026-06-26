@@ -62,7 +62,26 @@ ADMIN_PASSWORD=yourpassword
 
 Avoid quotes unless needed. If the password contains `$`, wrap in single quotes in `.env` or change the password to avoid `$` (systemd can mangle `$` in `EnvironmentFile`).
 
-**4. Try the default** if `adminAuthSource` is `default`:
+**4. Save fails with “cannot write content files”**
+
+SSH as root and run:
+
+```bash
+bash /var/www/vhosts/voiceawareness.biz/scripts/fix-cms-permissions.sh
+systemctl restart voiceawareness-biz
+```
+
+Verify:
+
+```bash
+curl -s http://127.0.0.1:3000/deploy-check
+```
+
+Look for `"homeJson":true` under `writable`.
+
+**Do not** run `git pull` inside `httpdocs` — it resets CMS files and breaks ownership. Use `deploy.sh` for code updates only.
+
+**5. Try the default** if `adminAuthSource` is `default`:
 
 - Username: `admin`
 - Password: `VoiceAwareness2025!`
