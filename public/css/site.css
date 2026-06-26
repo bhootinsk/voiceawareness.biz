@@ -212,8 +212,8 @@ p {
 }
 
 .hero-copy {
-  flex: 0 1 500px;
-  max-width: 500px;
+  flex: 0 1 560px;
+  max-width: 560px;
   padding-top: 20px;
   padding-left: 8px;
 }
@@ -894,8 +894,8 @@ p {
   }
 
   .hero-copy {
-    flex: 0 0 500px;
-    max-width: 500px;
+    flex: 0 0 560px;
+    max-width: 560px;
   }
 
   .hero-visual {
