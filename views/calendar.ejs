@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { metaDescription: page.metaDescription }) %>
+</head>
+<body class="page-inner page-calendar">
+  <%- include('partials/header') %>
+  <main class="page-main">
+    <section class="page-hero">
+      <div class="container page-hero-copy page-hero-copy--center">
+        <p class="section-label">Book online</p>
+        <h1><%= page.title %></h1>
+        <p class="page-intro">Schedule a free consultation or therapy session through Jane App — secure virtual and in-person appointments.</p>
+      </div>
+    </section>
+    <section class="section section--content">
+      <div class="container booking-layout">
+        <div class="booking-embed">
+          <iframe src="<%= site.calendarUrl %>" title="Book an appointment on Jane App" loading="lazy"></iframe>
+        </div>
+        <aside class="booking-aside">
+          <h2>Need help booking?</h2>
+          <p>Call <a href="tel:<%= site.phoneTel %>"><%= site.phoneDisplay %></a> or email <a href="mailto:<%= site.email %>"><%= site.email %></a>.</p>
+          <ul class="booking-steps">
+            <li>Choose a service or free consultation</li>
+            <li>Pick a date and time that works for you</li>
+            <li>Complete the short intake form</li>
+          </ul>
+          <a href="<%= site.janeApp %>" class="btn btn-primary btn-block" target="_blank" rel="noopener">Open Jane App</a>
+          <a href="/#bookafreeconsulation" class="btn btn-secondary btn-block">Contact form</a>
+        </aside>
+      </div>
+      <% if (page.html) { %>
+        <div class="container content-body narrow booking-note">
+          <%- page.html %>
+        </div>
+      <% } %>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

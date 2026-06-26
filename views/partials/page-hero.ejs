@@ -1,0 +1,19 @@
+<% const heroImage = page.heroImage || page.featuredImage; %>
+<% const heroLabel = page.type === 'blog' ? 'Blog' : (typeof heroLabelOverride !== 'undefined' ? heroLabelOverride : ''); %>
+<section class="page-hero<%= heroImage ? ' page-hero--has-image' : '' %>">
+  <div class="container page-hero-grid">
+    <div class="page-hero-copy">
+      <% if (heroLabel) { %><p class="section-label"><%= heroLabel %></p><% } %>
+      <h1><%= page.title %></h1>
+      <% if (page.excerpt) { %><p class="page-intro"><%= page.excerpt %></p><% } %>
+      <% if (page.type === 'blog' && page.publishedAt) { %>
+        <p class="post-meta">By <%= page.author || site.owner %> · <%= new Date(page.publishedAt).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+      <% } %>
+    </div>
+    <% if (heroImage) { %>
+      <div class="page-hero-image">
+        <img src="<%= heroImage %>" alt="<%= page.title %>" loading="eager" />
+      </div>
+    <% } %>
+  </div>
+</section>

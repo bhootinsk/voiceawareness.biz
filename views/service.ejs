@@ -3,22 +3,20 @@
 <head>
   <%- include('partials/head', { metaDescription: page.metaDescription }) %>
 </head>
-<body>
+<body class="page-inner page-service">
   <%- include('partials/header') %>
   <main class="page-main">
-    <section class="page-banner service-banner">
-      <div class="container">
-        <p class="section-label">Service</p>
-        <h1><%= page.title %></h1>
-      </div>
-    </section>
-    <section class="section">
-      <div class="container content-body">
+    <%- include('partials/page-hero', { heroLabelOverride: 'Service' }) %>
+    <section class="section section--content">
+      <div class="container content-body service-body">
         <%- page.html %>
         <div class="cta-panel">
           <h2>Ready to take the next step?</h2>
           <p>Book a free consultation to discuss whether this service is right for you.</p>
-          <a href="<%= site.janeApp %>" class="btn btn-primary" target="_blank" rel="noopener">Book on Jane App</a>
+          <div class="cta-panel-actions">
+            <a href="/calendar" class="btn btn-primary">Book online</a>
+            <a href="<%= site.janeApp %>" class="btn btn-secondary" target="_blank" rel="noopener">Jane App</a>
+          </div>
         </div>
       </div>
     </section>

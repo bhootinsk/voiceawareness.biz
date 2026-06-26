@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head', { metaDescription: page.metaDescription }) %>
+</head>
+<body class="page-inner page-blog">
+  <%- include('partials/header') %>
+  <main class="page-main">
+    <%- include('partials/page-hero', { heroLabelOverride: 'Blog' }) %>
+    <section class="section section--content">
+      <div class="container content-body article-body">
+        <%- page.html %>
+        <div class="article-footer">
+          <a href="/blogs" class="text-link">← Back to blogs</a>
+          <a href="<%= site.janeApp %>" class="btn btn-primary" target="_blank" rel="noopener">Book a consultation</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

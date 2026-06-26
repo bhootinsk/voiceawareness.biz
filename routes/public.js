@@ -39,21 +39,19 @@ function renderService(slug) {
 }
 
 router.get('/blogs', (req, res) => {
-  const page = content.getPage('blogs');
-  if (!page) return res.status(404).render('404', { title: 'Not Found' });
-  res.render('page', { title: page.title, page });
+  res.render('blogs', { title: 'Blogs', posts: content.listBlogPosts() });
 });
 
 router.get('/anxiety', (req, res) => {
   const page = content.getPage('anxiety');
   if (!page) return res.status(404).render('404', { title: 'Not Found' });
-  res.render('page', { title: page.title, page });
+  res.render('blog', { title: page.title, page });
 });
 
 router.get('/calendar', (req, res) => {
   const page = content.getPage('calendar');
   if (!page) return res.status(404).render('404', { title: 'Not Found' });
-  res.render('page', { title: page.title, page, wide: true });
+  res.render('calendar', { title: page.title, page });
 });
 
 router.get('/thank-you', (req, res) => {
