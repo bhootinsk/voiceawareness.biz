@@ -22,7 +22,15 @@ rsync -av "$CLONE_DIR/" "$APP_DIR/" \
   --exclude .env \
   --exclude node_modules \
   --exclude uploads \
+  --exclude content \
+  --exclude data \
   --exclude .git
+
+if [ ! -f "$APP_DIR/content/home.json" ]; then
+  echo "==> Seeding CMS content (first install)"
+  rsync -av "$CLONE_DIR/content/" "$APP_DIR/content/"
+  rsync -av "$CLONE_DIR/data/" "$APP_DIR/data/"
+fi
 
 cp /root/vab.env.bak "$APP_DIR/.env" 2>/dev/null || true
 

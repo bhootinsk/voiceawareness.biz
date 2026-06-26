@@ -101,6 +101,59 @@ Click **Save home page**, then refresh the public site.
 
 ---
 
+## Deploy vs CMS content
+
+| Action | Affects code (views, CSS, app.js) | Affects CMS content (`content/`, `data/`) |
+|--------|-----------------------------------|-------------------------------------------|
+| Admin save | No | Yes — live on server immediately |
+| `deploy.sh` | Yes — updates from GitHub | **No** — server CMS folders are preserved |
+
+Deploy backs up CMS content to `/root/vab-cms-backup/` before each run. To restore after a mistake:
+
+```bash
+bash /var/www/vhosts/voiceawareness.biz/scripts/restore-cms-backup.sh
+```
+
+---
+
+## Sync CMS content with GitHub
+
+Production CMS saves live on the server only. To copy them into the git repo (backup or version history):
+
+### Option A — publish from server (automatic)
+
+One-time: create a [GitHub personal access token](https://github.com/settings/tokens) with **repo** scope, then on the server:
+
+```bash
+echo 'GITHUB_TOKEN=ghp_your_token_here' > /root/vab-github.env
+chmod 600 /root/vab-github.env
+```
+
+After admin edits you want in GitHub:
+
+```bash
+bash /var/www/vhosts/voiceawareness.biz/scripts/publish-cms-to-github.sh
+```
+
+### Option B — export and import manually
+
+On the server:
+
+```bash
+bash /var/www/vhosts/voiceawareness.biz/scripts/export-cms-content.sh
+```
+
+Download the `.tar.gz` to your PC, then in this repo:
+
+```bash
+bash scripts/import-cms-content.sh vab-cms-export-YYYYMMDD-HHMMSS.tar.gz
+git add content data
+git commit -m "Sync CMS content from production."
+git push
+```
+
+---
+
 ## What still needs deploy
 
 Global CSS changes (new sections, colors site-wide, new features) still go through:
@@ -109,4 +162,4 @@ Global CSS changes (new sections, colors site-wide, new features) still go throu
 bash /var/www/vhosts/voiceawareness.biz/scripts/deploy.sh
 ```
 
-Hero slider values are stored in `content/home.json` and do **not** need deploy.
+Hero slider values are stored in `content/home.json` on the server and are **not** overwritten by deploy.
