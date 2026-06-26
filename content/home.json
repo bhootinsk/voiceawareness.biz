@@ -1,8 +1,12 @@
 {
   "heroEyebrow": "Find Your Inner Peace at Voice Awareness",
   "heroTitle": "Psychotherapy Counseling Services",
-  "heroTitleLines": ["Psychotherapy", "Counseling", "Services"],
-  "heroLead": "At VoiceAwareness Psychotherapy, we offer psychotherapy and counseling services for adults navigating anxiety, trauma, emotional overwhelm, relationship challenges, and life transitions. Our work is grounded in evidence-based and trauma-informed care, with a strong emphasis on collaboration, consent, and emotional safety.\n\nTherapy is not about quick fixes or being told what to do. It is a supportive process focused on increasing self-awareness, developing coping skills, and supporting long-term mental health and well-being. Services are individualized and thoughtfully adapted to each client's needs, experiences, and goals.",
+  "heroTitleLines": [
+    "Psychotherapy",
+    "Counseling",
+    "Services"
+  ],
+  "heroLead": "At VoiceAwareness Psychotherapy, we offer psychotherapy and counseling services for adults navigating anxiety, trauma, emotional overwhelm, relationship challenges, and life transitions. Our work is grounded in evidence-based and trauma-informed care, with a strong emphasis on collaboration, consent, and emotional safety.\r\n\r\nTherapy is not about quick fixes or being told what to do. It is a supportive process focused on increasing self-awareness, developing coping skills, and supporting long-term mental health and well-being. Services are individualized and thoughtfully adapted to each client's needs, experiences, and goals.",
   "heroButtonText": "Schedule a Booking",
   "heroButtonLink": "/calendar",
   "aboutTitle": "Hello, I'm Nayab",
@@ -11,13 +15,41 @@
   "aboutButtonText": "Learn About My Approach and More",
   "aboutButtonLink": "/my-approach",
   "connectLinks": [
-    { "label": "Watch my video at YouTube", "url": "https://www.youtube.com/watch?v=M3drdL08sy8", "icon": "fab fa-youtube" },
-    { "label": "Meet me at AKs", "url": "https://www.akstherapy.ca/about-5-2", "icon": "fas fa-building" },
-    { "label": "Meet me at JaneApp", "url": "https://voiceawareness.janeapp.com/#staff_member/1", "icon": "fas fa-user-md" },
-    { "label": "Read my article at First Session", "url": "https://www.firstsession.com/resources/south-asian-therapist", "icon": "fas fa-file-alt" },
-    { "label": "Meet me at Psychology Today", "url": "https://www.psychologytoday.com/ca/therapists/nayab-tahir-richmond-hill-on/1395672", "icon": "fas fa-book" },
-    { "label": "Meet me at First Session", "url": "https://www.firstsession.com/therapists/nayab-tahir", "icon": "fas fa-user" },
-    { "label": "Connect with me at LinkedIn", "url": "https://www.linkedin.com/in/nayab-tahir-93920778/?originalSubdomain=ca", "icon": "fab fa-linkedin" }
+    {
+      "label": "Watch my video at YouTube",
+      "url": "https://www.youtube.com/watch?v=M3drdL08sy8",
+      "icon": "fab fa-youtube"
+    },
+    {
+      "label": "Meet me at AKs",
+      "url": "https://www.akstherapy.ca/about-5-2",
+      "icon": "fas fa-building"
+    },
+    {
+      "label": "Meet me at JaneApp",
+      "url": "https://voiceawareness.janeapp.com/#staff_member/1",
+      "icon": "fas fa-user-md"
+    },
+    {
+      "label": "Read my article at First Session",
+      "url": "https://www.firstsession.com/resources/south-asian-therapist",
+      "icon": "fas fa-file-alt"
+    },
+    {
+      "label": "Meet me at Psychology Today",
+      "url": "https://www.psychologytoday.com/ca/therapists/nayab-tahir-richmond-hill-on/1395672",
+      "icon": "fas fa-book"
+    },
+    {
+      "label": "Meet me at First Session",
+      "url": "https://www.firstsession.com/therapists/nayab-tahir",
+      "icon": "fas fa-user"
+    },
+    {
+      "label": "Connect with me at LinkedIn",
+      "url": "https://www.linkedin.com/in/nayab-tahir-93920778/?originalSubdomain=ca",
+      "icon": "fab fa-linkedin"
+    }
   ],
   "servicesTitle": "My Services",
   "servicesIntro": "Feeling trapped in darkness is a common human experience, but it doesn't have to be permanent. By understanding the root causes of your feelings, engaging in self-discovery, and seeking the support you need, you can find your way back to light and purpose. Don't give up—Don't hesitate to book a free consultation with me and let me tailor my services to your unique situation and help you uncover your best self.",
@@ -96,11 +128,12 @@
     "approachesAlt": "/images/approaches-couple.jpg"
   },
   "layout": {
-    "heroCopyMaxWidth": 560,
+    "heroCopyMaxWidth": 580,
     "heroEyebrowFontSize": 32,
     "heroTitleFontSize": 70,
     "heroImageMaxWidth": 520,
     "heroGap": 2.5,
     "heroButtonPaddingLeft": 136
-  }
+  },
+  "updatedAt": "2026-06-26T06:39:19.787Z"
 }
