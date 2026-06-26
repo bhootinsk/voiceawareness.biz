@@ -10,7 +10,11 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <h2 class="hero-eyebrow"><%= home.heroEyebrow %></h2>
-        <h1><%= home.heroTitle %></h1>
+        <h1>
+          <% (home.heroTitleLines || home.heroTitle.split(' ')).forEach(function(line, i) { %>
+            <% if (i > 0) { %><br /><% } %><%= line %>
+          <% }); %>
+        </h1>
         <% home.heroLead.split('\n\n').forEach(function(p) { %>
           <p><%- p.replace('VoiceAwareness Psychotherapy', '<strong>VoiceAwareness Psychotherapy</strong>') %></p>
         <% }); %>

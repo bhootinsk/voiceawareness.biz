@@ -1,6 +1,7 @@
 {
   "heroEyebrow": "Find Your Inner Peace at Voice Awareness",
   "heroTitle": "Psychotherapy Counseling Services",
+  "heroTitleLines": ["Psychotherapy", "Counseling", "Services"],
   "heroLead": "At VoiceAwareness Psychotherapy, we offer psychotherapy and counseling services for adults navigating anxiety, trauma, emotional overwhelm, relationship challenges, and life transitions. Our work is grounded in evidence-based and trauma-informed care, with a strong emphasis on collaboration, consent, and emotional safety.\n\nTherapy is not about quick fixes or being told what to do. It is a supportive process focused on increasing self-awareness, developing coping skills, and supporting long-term mental health and well-being. Services are individualized and thoughtfully adapted to each client's needs, experiences, and goals.",
   "heroButtonText": "Schedule a Booking",
   "heroButtonLink": "/calendar",
