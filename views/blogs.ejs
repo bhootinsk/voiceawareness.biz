@@ -6,16 +6,11 @@
 <body class="page-inner page-blogs">
   <%- include('partials/header') %>
   <main class="page-main">
-    <section class="page-hero page-hero--has-image">
-      <div class="container page-hero-grid">
-        <div class="page-hero-copy">
-          <p class="section-label">Insights</p>
-          <h1>Blogs</h1>
-          <p class="page-intro">Articles on psychotherapy, mental health, anxiety, trauma recovery, and personal growth.</p>
-        </div>
-        <div class="page-hero-image">
-          <img src="/images/blog/blogs-hero.webp" alt="Voice Awareness blog" loading="eager" />
-        </div>
+    <section class="page-hero">
+      <div class="container page-hero-copy page-hero-copy--center">
+        <p class="section-label">Insights</p>
+        <h1>Blogs</h1>
+        <p class="page-intro">Articles on psychotherapy, mental health, anxiety, trauma recovery, and personal growth.</p>
       </div>
     </section>
     <section class="section section--content">
@@ -23,10 +18,18 @@
         <% if (posts.length) { %>
           <div class="blog-grid">
             <% posts.forEach(function(post) { %>
-              <% const cardImg = post.cardImage || post.featuredImage || '/images/blog/anxiety-card.webp'; %>
+              <% const cardImg = post.cardImage || '/images/blog/anxiety-card.webp'; %>
               <article class="blog-card">
                 <a href="<%= post.url %>" class="blog-card-image">
-                  <img src="<%= cardImg %>" alt="<%= post.title %>" loading="lazy" />
+                  <img
+                    src="<%= cardImg %>"
+                    srcset="<%= cardImg %> 400w, <%= post.featuredImage || cardImg %> 1080w"
+                    sizes="(max-width: 600px) 100vw, 400px"
+                    alt="<%= post.title %>"
+                    width="400"
+                    height="250"
+                    loading="lazy"
+                  />
                 </a>
                 <div class="blog-card-body">
                   <p class="post-meta">
