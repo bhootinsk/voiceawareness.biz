@@ -29,12 +29,19 @@ trim_token() {
   printf '%s' "$v"
 }
 
-if [ -f "$ENV_FILE" ]; then
-  # shellcheck disable=SC1090
-  source "$ENV_FILE"
-fi
+load_github_token() {
+  local file="$1"
+  local line=""
+  if [ ! -f "$file" ]; then
+    return 1
+  fi
+  line=$(grep -a 'GITHUB_TOKEN' "$file" | tail -1 | sed 's/^\xEF\xBB\xBF//' | tr -d '\r')
+  line="${line#GITHUB_TOKEN=}"
+  line="${line#export GITHUB_TOKEN=}"
+  trim_token "$line"
+}
 
-GITHUB_TOKEN=$(trim_token "$GITHUB_TOKEN")
+GITHUB_TOKEN=$(load_github_token "$ENV_FILE")
 
 if [ -z "$GITHUB_TOKEN" ]; then
   echo "GITHUB_TOKEN is not set."
