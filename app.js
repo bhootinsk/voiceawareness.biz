@@ -66,6 +66,7 @@ app.get('/deploy-check', (_req, res) => {
     adminAuthSource: admin.source,
     adminUsername: admin.username,
     adminEnvLoaded: admin.envFileReadable,
+    writable: content.writableStatus(),
   });
 });
 

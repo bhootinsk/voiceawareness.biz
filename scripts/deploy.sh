@@ -31,6 +31,10 @@ cd "$APP_DIR"
 export PATH="$NODE_BIN:$PATH"
 npm install --production
 
+echo "==> Fixing permissions for CMS writes"
+chown -R voiceawarenessbiz:psacln "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
+chmod -R u+rwX "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
+
 echo "==> Restarting service"
 if systemctl is-enabled "$SERVICE" >/dev/null 2>&1; then
   systemctl restart "$SERVICE"

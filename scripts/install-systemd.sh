@@ -34,6 +34,10 @@ if [ -f "$APP_DIR/.env" ]; then
   chown voiceawarenessbiz:psacln "$APP_DIR/.env"
   chmod 640 "$APP_DIR/.env"
 fi
+echo "==> Fixing permissions for CMS writes"
+chown -R voiceawarenessbiz:psacln "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
+chmod -R u+rwX "$APP_DIR/content" "$APP_DIR/data" "$APP_DIR/uploads"
+
 cp "$SERVICE_FILE" /etc/systemd/system/$SERVICE.service
 systemctl daemon-reload
 systemctl enable "$SERVICE"

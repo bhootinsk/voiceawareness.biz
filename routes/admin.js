@@ -35,6 +35,22 @@ function setFlash(req, message, level = 'success') {
   req.session.flash = { message, level };
 }
 
+function saveOrFlash(req, res, redirectTo, saveFn, successMessage) {
+  try {
+    saveFn();
+    setFlash(req, successMessage);
+    res.redirect(redirectTo);
+  } catch (err) {
+    console.error(`Admin save failed (${redirectTo}):`, err);
+    const hint =
+      err.code === 'EACCES'
+        ? 'Server cannot write content files. Run: chown -R voiceawarenessbiz:psacln content data uploads'
+        : err.message;
+    setFlash(req, `Save failed: ${hint}`, 'error');
+    res.redirect(redirectTo);
+  }
+}
+
 router.use((req, res, next) => {
   if (req.session.flash) {
     res.locals.flash = req.session.flash;
@@ -112,9 +128,7 @@ router.post('/site', requireAuth, (req, res) => {
       /* keep existing */
     }
   }
-  content.saveSite(site);
-  setFlash(req, 'Site settings saved.');
-  res.redirect('/admin/site');
+  saveOrFlash(req, res, '/admin/site', () => content.saveSite(site), 'Site settings saved.');
 });
 
 router.get('/home', requireAuth, (req, res) => {
@@ -159,9 +173,7 @@ router.post('/home', requireAuth, (req, res) => {
     }
   }
 
-  content.saveHome(updated);
-  setFlash(req, 'Home page content saved.');
-  res.redirect('/admin/home');
+  saveOrFlash(req, res, '/admin/home', () => content.saveHome(updated), 'Home page content saved.');
 });
 
 router.get('/pages', requireAuth, (req, res) => {
@@ -190,9 +202,13 @@ router.post('/pages/save', requireAuth, (req, res) => {
     bodyFormat: body.bodyFormat || 'markdown',
     navOrder: Number(body.navOrder) || existing?.navOrder || 99,
   };
-  content.savePage(page);
-  setFlash(req, `Page "${page.title}" saved.`);
-  res.redirect(`/admin/pages/edit/${page.slug}`);
+  saveOrFlash(
+    req,
+    res,
+    `/admin/pages/edit/${page.slug}`,
+    () => content.savePage(page),
+    `Page "${page.title}" saved.`
+  );
 });
 
 router.get('/media', requireAuth, (req, res) => {

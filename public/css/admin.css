@@ -135,6 +135,11 @@ body.admin-body {
   background: #dcfCE7;
 }
 
+.flash-error {
+  background: #fee4e2;
+  color: #912018;
+}
+
 .error,
 .notice {
   padding: 0.75rem 1rem;
