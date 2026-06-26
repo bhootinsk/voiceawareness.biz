@@ -147,12 +147,21 @@ Production CMS saves live on the server only. To copy them into the git repo (ba
 
 ### Option A — publish from server (automatic)
 
-One-time: create a [GitHub personal access token](https://github.com/settings/tokens) with **repo** scope, then on the server:
+One-time: create a [GitHub personal access token](https://github.com/settings/tokens) with **repo** scope (classic token), then on the server:
 
 ```bash
-echo 'GITHUB_TOKEN=ghp_your_token_here' > /root/vab-github.env
+printf 'GITHUB_TOKEN=ghp_your_real_token\n' > /root/vab-github.env
 chmod 600 /root/vab-github.env
 ```
+
+Use your real token — **no quotes**, no spaces around `=`. Test it:
+
+```bash
+source /root/vab-github.env
+curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/user
+```
+
+You should see your GitHub login name, not `"message": "Bad credentials"`.
 
 After admin edits you want in GitHub:
 
