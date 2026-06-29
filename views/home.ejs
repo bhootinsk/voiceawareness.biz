@@ -15,20 +15,23 @@
             <% if (i > 0) { %><br /><% } %><%= line %>
           <% }); %>
         </h1>
-        <% home.heroLead.split('\n\n').forEach(function(p) { %>
-          <p><%- p.replace('VoiceAwareness Psychotherapy', '<strong>VoiceAwareness Psychotherapy</strong>') %></p>
-        <% }); %>
+        <% if ((home.heroLeadItems || []).length) { %>
+          <ul class="hero-lead-list">
+            <% home.heroLeadItems.forEach(function(item) { %>
+              <li><%= item %></li>
+            <% }); %>
+          </ul>
+        <% } else if (home.heroLead) { %>
+          <% home.heroLead.split('\n\n').forEach(function(p) { %>
+            <p><%- p.replace('VoiceAwareness Psychotherapy', '<strong>VoiceAwareness Psychotherapy</strong>') %></p>
+          <% }); %>
+        <% } %>
         <a href="<%= home.heroButtonLink %>" class="btn btn-primary"><%= home.heroButtonText %></a>
       </div>
       <div class="hero-visual">
-        <div class="hero-portrait-wrap">
-          <img src="<%= home.images.heroPortrait %>" alt="Online Trauma Therapy Services" class="hero-portrait" width="486" height="730" loading="eager" />
+        <div class="hero-banner-wrap">
+          <img src="<%= home.images.heroBanner || home.images.heroPortrait %>" alt="Therapy that meets you where you are" class="hero-banner" loading="eager" />
         </div>
-        <% if (home.images.heroSession) { %>
-          <div class="hero-session-wrap">
-            <img src="<%= home.images.heroSession %>" alt="Psychotherapy Counseling Services" class="hero-session" width="231" height="154" loading="eager" />
-          </div>
-        <% } %>
       </div>
     </div>
   </section>
@@ -40,17 +43,13 @@
         <h2><%= home.aboutTitle %></h2>
         <h4 class="about-subtitle"><strong><%= home.aboutSubtitle %></strong></h4>
         <div class="section-divider" aria-hidden="true"></div>
-        <p><%= home.aboutBody %></p>
-        <h3><strong>Connect with Me</strong></h3>
-        <div class="contact-links">
-          <% (home.connectLinks || []).forEach(function(link) { %>
-            <span>
-              <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer">
-                <i class="<%= link.icon %>"></i> <%= link.label %>
-              </a>
-            </span>
-          <% }); %>
-        </div>
+        <% home.aboutBody.split('\n\n').forEach(function(p) { %>
+          <p><%= p %></p>
+        <% }); %>
+        <% if (home.consultationTitle) { %>
+          <h3 class="consultation-heading"><strong><%= home.consultationTitle %></strong></h3>
+          <p><%= home.consultationBody %></p>
+        <% } %>
         <a href="<%= home.aboutButtonLink %>" class="btn btn-primary"><%= home.aboutButtonText %></a>
       </div>
       <div class="about-visual">
@@ -60,115 +59,123 @@
   </section>
 
   <section class="section services-section" id="services">
-    <div class="container services-layout">
-      <div class="services-intro-col">
-        <p class="section-label center-label">Services</p>
-        <h2><%= home.servicesTitle %></h2>
-        <div class="section-divider" aria-hidden="true"></div>
-        <p><%= home.servicesIntro %></p>
-      </div>
-      <div class="services-blurbs-col">
-        <% (site.services || []).slice(0, 2).forEach(function(service) { %>
-          <article class="service-blurb">
-            <div class="service-blurb-icon"><i class="fas <%= service.icon %>"></i></div>
-            <div>
-              <h4><%= service.title %></h4>
-              <p><%= service.summary %></p>
-              <a href="<%= service.path %>" class="learn-more">Learn More</a>
-            </div>
-          </article>
-        <% }); %>
-      </div>
-      <div class="services-blurbs-col">
-        <% (site.services || []).slice(2).forEach(function(service) { %>
-          <article class="service-blurb">
-            <div class="service-blurb-icon"><i class="fas <%= service.icon %>"></i></div>
-            <div>
-              <h4><%= service.title %></h4>
-              <p><%= service.summary %></p>
-              <a href="<%= service.path %>" class="learn-more">Learn More</a>
-            </div>
-          </article>
-        <% }); %>
-      </div>
+    <div class="container concern-areas-header">
+      <p class="section-label center-label">Services</p>
+      <h2 class="concern-areas-title"><%= home.servicesTitle %></h2>
+      <div class="section-divider" aria-hidden="true"></div>
+      <% if (home.servicesIntro) { %><p class="concern-areas-intro"><%= home.servicesIntro %></p><% } %>
+    </div>
+    <div class="container concern-areas-grid">
+      <% (home.concernAreas || []).forEach(function(area) { %>
+        <article class="concern-card">
+          <i class="fas fa-heart concern-card-icon" aria-hidden="true"></i>
+          <div>
+            <h4><%= area.title %></h4>
+            <p><%= area.summary %></p>
+          </div>
+        </article>
+      <% }); %>
     </div>
 
-    <div class="container split-row">
+    <div class="container split-row welcome-block">
       <div>
         <h3><strong><%= home.audienceTitle %></strong></h3>
         <p><%= home.audienceIntro %></p>
-        <ul class="bullet-list">
-          <% (home.audienceItems || []).forEach(function(item) { %>
-            <li><%= item %></li>
-          <% }); %>
-        </ul>
         <p><%= home.audienceFooter %></p>
+        <% if (home.audienceButtonText) { %>
+          <a href="<%= home.audienceButtonLink || '/calendar' %>" class="btn btn-primary section-cta"><%= home.audienceButtonText %></a>
+        <% } %>
       </div>
       <div class="split-image">
         <img src="<%= home.images.audience %>" alt="" loading="lazy" />
       </div>
     </div>
 
-    <div class="container split-row reverse">
-      <div class="split-image">
-        <img src="<%= home.images.registered %>" alt="" loading="lazy" />
+    <div class="container home-subsection work-together-block">
+      <div class="split-row reverse">
+        <div class="split-image">
+          <img src="<%= home.images.registered %>" alt="" loading="lazy" />
+        </div>
+        <div>
+          <h3><strong><%= home.workTogetherTitle %></strong></h3>
+          <p><%= home.workTogetherIntro %></p>
+        </div>
       </div>
-      <div>
-        <h3><strong><%= home.registeredTitle %></strong></h3>
-        <% home.registeredBody.split('\n\n').forEach(function(p) { %>
-          <p><%= p %></p>
+      <div class="info-card-grid cols-3">
+        <% (home.workTogetherFeatures || []).forEach(function(item) { %>
+          <article class="info-card">
+            <i class="fas <%= item.icon %> info-card-icon" aria-hidden="true"></i>
+            <div>
+              <h4><%= item.title %></h4>
+              <p><%= item.summary %></p>
+            </div>
+          </article>
         <% }); %>
       </div>
     </div>
 
-    <div class="container split-row">
-      <div>
-        <h3><strong><%= home.approachesTitle %></strong></h3>
-        <p><%= home.approachesIntro %></p>
-        <ul class="bullet-list">
-          <% (home.approachesItems || []).forEach(function(item) { %>
-            <li><%= item %></li>
+    <div class="container home-subsection approach-block">
+      <div class="split-row">
+        <div>
+          <h3><strong><%= home.approachesTitle %></strong></h3>
+          <% home.approachesIntro.split('\n\n').forEach(function(p) { %>
+            <p><%= p %></p>
           <% }); %>
-        </ul>
-        <p><%= home.approachesFooter %></p>
+        </div>
+        <div class="split-image">
+          <img src="<%= home.images.approaches %>" alt="" loading="lazy" />
+        </div>
       </div>
-      <div class="split-image">
-        <img src="<%= home.images.approaches %>" alt="" loading="lazy" />
-      </div>
-    </div>
-
-    <div class="container split-row reverse">
-      <div class="split-image">
-        <img src="<%= home.images.jurisdiction %>" alt="" loading="lazy" />
-      </div>
-      <div>
-        <h3><strong><%= home.jurisdictionTitle %></strong></h3>
-        <% home.jurisdictionBody.split('\n\n').forEach(function(p) { %>
-          <p><%= p %></p>
+      <div class="info-card-grid cols-2">
+        <% (home.approachMethods || []).forEach(function(item) { %>
+          <article class="info-card">
+            <i class="fas <%= item.icon %> info-card-icon" aria-hidden="true"></i>
+            <div>
+              <h4><%= item.title %></h4>
+              <p><%= item.summary %></p>
+            </div>
+          </article>
         <% }); %>
       </div>
+      <p class="subsection-footer"><%= home.approachesFooter %></p>
     </div>
 
-    <div class="container split-row">
-      <div>
-        <h3><strong><%= home.approachesTitle %></strong></h3>
-        <p><%= home.approachesIntro %></p>
-        <ul class="bullet-list">
-          <% (home.approachesItems || []).forEach(function(item) { %>
-            <li><%= item %></li>
-          <% }); %>
-        </ul>
-        <p><%= home.approachesFooter %></p>
+    <div class="container home-subsection virtual-therapy-block">
+      <div class="virtual-therapy-header">
+        <h3><strong><i class="fas fa-globe-americas virtual-globe-icon" aria-hidden="true"></i> <%= home.virtualTherapyTitle %></strong></h3>
+        <p class="virtual-tagline"><strong><%= home.virtualTherapyTagline %></strong></p>
+        <p><%= home.virtualTherapyIntro %></p>
       </div>
-      <div class="split-image">
-        <img src="<%= home.images.approachesAlt %>" alt="" loading="lazy" />
+      <h4 class="virtual-subheading"><%= home.virtualTherapyWhyTitle %></h4>
+      <div class="info-card-grid cols-4">
+        <% (home.virtualTherapyBenefits || []).forEach(function(item) { %>
+          <article class="info-card compact">
+            <i class="fas <%= item.icon %> info-card-icon" aria-hidden="true"></i>
+            <div>
+              <h4><%= item.title %></h4>
+              <p><%= item.summary %></p>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+      <div class="split-row reverse virtual-where-row">
+        <div class="split-image">
+          <img src="<%= home.images.jurisdiction %>" alt="" loading="lazy" />
+        </div>
+        <div>
+          <h4><strong><%= home.virtualTherapyWhereTitle %></strong></h4>
+          <p><%= home.virtualTherapyWhereBody %></p>
+          <% if (home.virtualTherapyButtonText) { %>
+            <a href="<%= home.virtualTherapyButtonLink || '/calendar' %>" class="btn btn-primary section-cta"><%= home.virtualTherapyButtonText %></a>
+          <% } %>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section faq-section">
     <div class="container">
-      <h2 class="faq-heading"><%= home.faqsTitle %></h2>
+      <h2 class="faq-heading"><i class="fas fa-heart faq-heart-icon" aria-hidden="true"></i> <%= home.faqsTitle %></h2>
       <div class="faq-accordion">
         <% (home.faqs || []).forEach(function(faq, i) { %>
           <div class="faq-toggle<%= i === 0 ? ' open' : '' %>">

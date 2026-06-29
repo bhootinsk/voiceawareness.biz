@@ -1,17 +1,23 @@
 {
-  "heroEyebrow": "Find Your Inner Peace at Voice Awareness",
-  "heroTitle": "Psychotherapy Counseling Services",
+  "heroEyebrow": "Helping you make sense of what feels overwhelming, one conversation at a time",
+  "heroTitle": "Therapy that meets you where you are",
   "heroTitleLines": [
-    "Psychotherapy",
-    "Counseling",
-    "Services"
+    "Therapy that meets",
+    "you where you are"
   ],
-  "heroLead": "At VoiceAwareness Psychotherapy, we offer psychotherapy and counseling services for adults navigating anxiety, trauma, emotional overwhelm, relationship challenges, and life transitions. Our work is grounded in evidence-based and trauma-informed care, with a strong emphasis on collaboration, consent, and emotional safety.\r\n\r\nTherapy is not about quick fixes or being told what to do. It is a supportive process focused on increasing self-awareness, developing coping skills, and supporting long-term mental health and well-being. Services are individualized and thoughtfully adapted to each client's needs, experiences, and goals.",
+  "heroLead": "",
+  "heroLeadItems": [
+    "Maybe you've been carrying everything on your own for so long that it feels normal.",
+    "You might look like you're managing on the outside while quietly struggling on the inside. Whether you're feeling anxious, overwhelmed, stuck, or simply exhausted from trying to keep it all together, you don't have to navigate it alone.",
+    "Therapy is a space where you can slow down, make sense of what's been weighing on you, and begin moving toward a life that feels more balanced, meaningful, and authentic."
+  ],
   "heroButtonText": "Schedule a Booking",
   "heroButtonLink": "/calendar",
   "aboutTitle": "Hello, I'm Nayab",
-  "aboutSubtitle": "Your Personal Psycho Therapist and Counselor",
-  "aboutBody": "I am pleased to present myself as a dedicated psychotherapist based in Canada. A unique combination of my qualifications including a master's degree in counselling psychology (MACP) from Yorkville University, a Bachelor of Arts in Psychology, and a Bachelor of Science in Pharmacy enables me to understand and deal with psychological issues at clinical level. I have diverse cross cultural life experiences with virtue of living in five countries and nurturing human relationships with multiple ethnicities. This rich blend of education and personal journey has shaped my understanding of people's challenges across diverse communities. This lifelong journey of cultural intersectionality has also fueled my dedication to carving out my identity and understanding the diverse challenges people face. These experiences have highlighted the pervasive stigma around mental health in many communities. My passion lies in breaking down this stigma and offering support to those who feel lost or in need",
+  "aboutSubtitle": "I'm so glad you're here",
+  "aboutBody": "Reaching out for therapy isn't always easy. Whether you've been thinking about it for months or you've landed here after a particularly difficult day, you've already taken an important first step.\n\nMy goal is to create a space where you don't feel judged, rushed, or expected to have everything figured out. Together, we'll explore what's been weighing on you, understand the patterns keeping you stuck, and work toward meaningful, lasting change.\n\nI believe therapy isn't about \"fixing\" you, because you aren't broken. It's about helping you better understand yourself so you can move through life with greater clarity, confidence, and self-compassion.",
+  "consultationTitle": "Your healing journey starts with one conversation.",
+  "consultationBody": "If you're wondering whether therapy is the right fit, I offer a free 15-minute consultation where we can talk about what's bringing you here, answer your questions, and see if we're a good fit.",
   "aboutButtonText": "Learn About My Approach and More",
   "aboutButtonLink": "/my-approach",
   "connectLinks": [
@@ -51,75 +57,172 @@
       "icon": "fab fa-linkedin"
     }
   ],
-  "servicesTitle": "My Services",
-  "servicesIntro": "Feeling trapped in darkness is a common human experience, but it doesn't have to be permanent. By understanding the root causes of your feelings, engaging in self-discovery, and seeking the support you need, you can find your way back to light and purpose. Don't give up—Don't hesitate to book a free consultation with me and let me tailor my services to your unique situation and help you uncover your best self.",
-  "audienceTitle": "Who Our Counseling Services Are For",
-  "audienceIntro": "Our psychotherapy services may be a good fit if you are:",
-  "audienceItems": [
-    "Experiencing anxiety, stress, or persistent worry",
-    "Processing trauma or difficult past experiences",
-    "Feeling emotionally overwhelmed or burned out",
-    "Navigating relationship, cultural, or identity-related concerns",
-    "Seeking greater self-understanding and emotional regulation",
-    "Seeking behavioral health counseling",
-    "Looking for a licensed psychotherapist in Ontario"
+  "servicesTitle": "You don't have to struggle alone with...",
+  "servicesIntro": "",
+  "concernAreas": [
+    {
+      "title": "Anxiety & Overthinking",
+      "summary": "When your mind won't slow down and you're constantly worrying, second-guessing yourself, or expecting the worst."
+    },
+    {
+      "title": "Trauma & PTSD",
+      "summary": "Helping you process painful experiences, reduce their impact, and regain a sense of safety."
+    },
+    {
+      "title": "Depression & Low Mood",
+      "summary": "When it feels difficult to find motivation, joy, or hope, therapy can help you reconnect with yourself."
+    },
+    {
+      "title": "Relationship Challenges",
+      "summary": "Whether you're struggling with communication, boundaries, conflict, or heartbreak, you don't have to navigate it alone."
+    },
+    {
+      "title": "Self-Esteem & Confidence",
+      "summary": "Break free from self-doubt, people-pleasing, and the feeling that you're never enough."
+    },
+    {
+      "title": "Stress & Burnout",
+      "summary": "When you're constantly carrying everyone else's needs and have forgotten how to take care of your own."
+    }
   ],
-  "audienceFooter": "Clients do not need to be in crisis to begin therapy. Many people seek counseling as a proactive step toward improved emotional well-being, personal growth, and balance in daily life.",
-  "registeredTitle": "Working With a Registered Psychotherapist",
-  "registeredBody": "Working with a Registered Psychotherapist provides a confidential and professional space to explore thoughts, emotions, and patterns without judgment. Therapy is collaborative and client-led, meaning you remain in control of the pace, focus, and depth of sessions.\n\nIn accordance with professional standards, therapy is conducted within clearly defined ethical and clinical boundaries. Informed consent, respect for autonomy, and emotional safety are prioritized throughout the therapeutic process.",
-  "approachesTitle": "Therapeutic Approaches",
-  "approachesIntro": "Our psychotherapy services integrate evidence-based and trauma-informed approaches, which may include:",
-  "approachesItems": [
-    "Cognitive Behavioural Therapy (CBT)",
-    "Dialectical Behaviour Therapy (DBT)",
-    "Internal Family Systems (IFS)",
-    "Trauma-informed psychotherapy",
-    "Brain spotting",
-    "Mindfulness-based and nervous-system-focused interventions"
+  "audienceTitle": "Whatever brought you here, you're welcome here.",
+  "audienceIntro": "Whether you're struggling with anxiety, navigating a difficult relationship, processing past experiences, or simply feeling overwhelmed by life, therapy offers a space to slow down, feel heard, and begin moving toward meaningful change.",
+  "audienceSubtitle": "",
+  "audienceItems": [],
+  "audienceFooter": "You don't need to have everything figured out before reaching out. Together, we'll work toward helping you feel more like yourself again.",
+  "audienceButtonText": "Book Your Free 15-Minute Consultation",
+  "audienceButtonLink": "/calendar",
+  "workTogetherTitle": "What It's Like to Work Together",
+  "workTogetherIntro": "Starting therapy can feel intimidating, especially if it's your first time. My goal is to create a space where you feel heard, supported, and never judged. Together, we'll explore what's been weighing on you, uncover patterns that may be keeping you stuck, and work toward meaningful, lasting change, at a pace that feels right for you.",
+  "workTogetherFeatures": [
+    {
+      "icon": "fa-heart",
+      "title": "A Safe Space",
+      "summary": "Feel heard without judgment or pressure."
+    },
+    {
+      "icon": "fa-heart",
+      "title": "Tailored to You",
+      "summary": "Every therapy journey is unique. Together, we'll find an approach that fits your needs and goals."
+    },
+    {
+      "icon": "fa-heart",
+      "title": "Practical & Meaningful",
+      "summary": "Leave each session with greater clarity, insight, and tools you can use in everyday life."
+    }
   ],
-  "approachesFooter": "Approaches are selected based on individual needs and adjusted over time as therapy progresses. Therapy is not one-size-fits-all, and techniques are used flexibly rather than rigidly.",
-  "jurisdictionTitle": "Therapy Services & Jurisdiction",
-  "jurisdictionBody": "Often times you may want to know which councillor near me or which counseling services near me are available. VoiceAwareness Psychotherapy provides psychotherapy and counseling services to clients located in Ontario and, where permitted, to individuals located in other jurisdictions through secure virtual therapy.\n\nAvailability of services outside Ontario is subject to regulatory requirements of the client's location. Clients are encouraged to inquire regarding eligibility for services prior to booking.",
-  "faqsTitle": "FAQS",
+  "approachesTitle": "My Approach to Therapy",
+  "approachesIntro": "I believe there is no one-size-fits-all approach to therapy because no two people have the same story. That's why I tailor each session to your unique experiences, goals, and strengths.\n\nDrawing from a range of evidence-based approaches, we'll work together to better understand your thoughts, emotions, and patterns while building practical tools that support lasting change.",
+  "approachMethods": [
+    {
+      "icon": "fa-brain",
+      "title": "Cognitive Behavioural Therapy",
+      "summary": "Learn to recognize and change unhelpful thought patterns."
+    },
+    {
+      "icon": "fa-heart",
+      "title": "Internal Family Systems",
+      "summary": "Understand the different parts of yourself with curiosity and compassion."
+    },
+    {
+      "icon": "fa-seedling",
+      "title": "Brainspotting",
+      "summary": "Process trauma and emotional distress through a brain-body approach."
+    },
+    {
+      "icon": "fa-star",
+      "title": "Solution-Focused Therapy",
+      "summary": "Build on your strengths and create practical steps toward your goals."
+    },
+    {
+      "icon": "fa-cloud",
+      "title": "Mindfulness",
+      "summary": "Develop greater awareness and reduce overwhelm."
+    }
+  ],
+  "approachesFooter": "The goal isn't to fit you into one therapy model. It's to find the approach that best supports your unique journey toward healing and growth.",
+  "virtualTherapyTitle": "Virtual Therapy Across Canada",
+  "virtualTherapyTagline": "Compassionate therapy, wherever you are.",
+  "virtualTherapyIntro": "Whether you're in Vancouver, Calgary, Toronto, Halifax, or anywhere in between, you can access secure virtual therapy from the comfort and privacy of your own space.",
+  "virtualTherapyWhyTitle": "Why clients choose virtual therapy",
+  "virtualTherapyBenefits": [
+    {
+      "icon": "fa-laptop",
+      "title": "100% Virtual",
+      "summary": "Attend sessions from the comfort of your own space."
+    },
+    {
+      "icon": "fa-lock",
+      "title": "Secure & Confidential",
+      "summary": "Your privacy is always protected through secure video sessions."
+    },
+    {
+      "icon": "fa-calendar-alt",
+      "title": "Flexible Scheduling",
+      "summary": "Appointments designed to fit into your busy life."
+    },
+    {
+      "icon": "fa-flag",
+      "title": "Serving Clients Across Canada",
+      "summary": "Virtual therapy that's accessible wherever you are."
+    }
+  ],
+  "virtualTherapyWhereTitle": "Where I Provide Therapy",
+  "virtualTherapyWhereBody": "I provide virtual psychotherapy to clients across Canada. Services are offered in accordance with the regulations of the province or territory where you are physically located at the time of your appointment.",
+  "virtualTherapyButtonText": "Book Your Free 15-Minute Consultation",
+  "virtualTherapyButtonLink": "/calendar",
+  "faqsTitle": "Frequently Asked Questions",
   "faqs": [
     {
-      "question": "Do you offer virtual psychotherapy in Ontario?",
-      "answer": "Yes. Virtual psychotherapy services are available to clients who are physically located in Ontario at the time of their session."
+      "question": "How do I know if therapy is right for me?",
+      "answer": "You don't have to be in crisis to benefit from therapy. Whether you're feeling anxious, overwhelmed, stuck, navigating a difficult life transition, or simply looking to understand yourself better, therapy can provide a supportive space to help you move forward."
     },
     {
-      "question": "Can you see clients outside of Ontario?",
-      "answer": "Psychotherapy services may be available to clients located outside Ontario where virtual psychotherapy is permitted by the regulatory requirements of the client's jurisdiction. Availability is assessed on a case-by-case basis, and clients are encouraged to inquire prior to booking."
+      "question": "What can I expect during my first session?",
+      "answer": "Our first session is a chance to get to know each other. We'll talk about what's bringing you to therapy, explore your goals, and discuss what you'd like to gain from our work together. There's no pressure to have everything figured out—we'll move at a pace that feels comfortable for you."
     },
     {
-      "question": "How do I know if psychotherapy near me is available and right for me?",
-      "answer": "A consultation can help determine whether psychotherapy aligns with your needs and goals. However, first thing to explore for anyone in the need is to see which therapist or counselling near me is available. I am here to help since therapy is a collaborative process, and fit is an important part of effective care. Book a free consultation and I will guide you."
+      "question": "Do you offer a free consultation?",
+      "answer": "Yes! I offer a complimentary 15-minute virtual consultation where we can discuss your concerns, answer any questions, and determine whether we're a good fit to work together."
     },
     {
-      "question": "What is Online Therapy for Trauma?",
-      "answer": "Online Therapy for Trauma offers remote help to individuals facing emotional distress from past adventures. Using secure video conferencing tools, our therapists provide a safe space for you to explore and understand your feelings, fostering healing without the need to travel."
+      "question": "How long is each therapy session?",
+      "answer": "Individual therapy sessions are 50 minutes in length and are conducted virtually through a secure video platform."
     },
     {
-      "question": "How do Personalized Online Therapy Sessions work?",
-      "answer": "Every session is tailored to fulfill your unique moving and psychological needs. Our therapists use a variety of techniques to address unique challenges, ensuring therapy aligns with your individual healing journey and life goals."
+      "question": "Are therapy sessions confidential?",
+      "answer": "Yes. Your privacy is very important. Everything discussed in therapy is kept confidential, with a few legal and ethical exceptions that will be reviewed during the informed consent process."
     },
     {
-      "question": "What are the benefits of Stress Management Therapy?",
-      "answer": "Stress Control Therapy helps you manage daily stressors and improve your mental and physical health. Our experienced psychotherapists teach you relaxation and resiliency skills to improve your quality of life."
+      "question": "Do you provide virtual therapy?",
+      "answer": "Yes! All sessions are offered virtually, allowing you to access therapy from the comfort of your own space."
     },
     {
-      "question": "Can EMDR Therapy Services for Youth help with anxiety?",
-      "answer": "Eye Movement Desensitization and Reprocessing has transformed youth anxiety and trauma treatment. This therapy helps resolve traumatic experiences, improving emotional stability."
+      "question": "Do you accept insurance?",
+      "answer": "Many extended health benefit plans cover psychotherapy services. I recommend checking with your insurance provider to confirm your coverage for services provided by a Registered Psychotherapist (Qualifying). (Once you're approved by TELUS Health, GreenShield, etc., this answer can be updated.)"
     },
     {
-      "question": "What distinguishes your Online Psychotherapy Services?",
-      "answer": "We provide client-oriented services. That implies reviewing and understanding the individual needs free of cost, and then engineer our therapy techniques to suit client's needs and budgets."
+      "question": "How often should I attend therapy?",
+      "answer": "The frequency of therapy depends on your goals and needs. Many clients begin with weekly sessions and gradually reduce the frequency as they make progress."
+    },
+    {
+      "question": "What if I'm nervous about starting therapy?",
+      "answer": "Feeling nervous is completely normal. Starting therapy can feel like a big step, especially if it's your first experience. My goal is to create a warm, supportive, and non-judgmental space where you can feel comfortable being yourself."
+    },
+    {
+      "question": "How do I know if we're a good fit?",
+      "answer": "Finding the right therapist matters. That's why I offer a free 15-minute consultation. It's an opportunity for us to meet, discuss your goals, and determine whether working together feels like the right fit."
+    },
+    {
+      "question": "What if I don't know what to talk about?",
+      "answer": "You don't need to come into therapy with all the answers. Many people start therapy simply knowing that something doesn't feel right. Together, we'll explore what's been on your mind and help make sense of it, one conversation at a time."
     }
   ],
   "contactPsychologyHeading": "CONTACT ME AT PSYCHOLGYTODAY",
   "contactPhoneHeading": "Call Toll Free at (1) 800 857 0609 OR send a message below",
   "images": {
-    "heroSession": "/images/hero-session.webp",
-    "heroPortrait": "/images/hero-portrait.webp",
+    "heroBanner": "/images/hero-banner.png",
+    "heroPortrait": "/images/hero-banner.png",
     "aboutPortrait": "/images/about-nayab.webp",
     "audience": "/images/audience-therapy.jpg",
     "registered": "/images/registered-psychotherapy.jpg",
@@ -128,12 +231,12 @@
     "approachesAlt": "/images/approaches-couple.jpg"
   },
   "layout": {
-    "heroCopyMaxWidth": 580,
-    "heroEyebrowFontSize": 32,
-    "heroTitleFontSize": 70,
-    "heroImageMaxWidth": 520,
-    "heroGap": 2.5,
+    "heroCopyMaxWidth": 640,
+    "heroEyebrowFontSize": 28,
+    "heroTitleFontSize": 56,
+    "heroImageMaxWidth": 580,
+    "heroGap": 2,
     "heroButtonPaddingLeft": 136
   },
-  "updatedAt": "2026-06-26T06:39:19.787Z"
+  "updatedAt": "2026-06-13T00:00:00.000Z"
 }

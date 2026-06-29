@@ -147,20 +147,35 @@ router.post('/home', requireAuth, (req, res) => {
     heroEyebrow: req.body.heroEyebrow,
     heroTitle: req.body.heroTitle,
     heroLead: req.body.heroLead,
+    heroLeadItems: req.body.heroLeadItems
+      ? req.body.heroLeadItems.split('\n').map((s) => s.trim()).filter(Boolean)
+      : home.heroLeadItems,
     aboutTitle: req.body.aboutTitle,
     aboutSubtitle: req.body.aboutSubtitle,
     aboutBody: req.body.aboutBody,
+    consultationTitle: req.body.consultationTitle,
+    consultationBody: req.body.consultationBody,
     servicesTitle: req.body.servicesTitle,
     servicesIntro: req.body.servicesIntro,
     audienceTitle: req.body.audienceTitle,
     audienceIntro: req.body.audienceIntro,
-    audienceItems: req.body.audienceItems
-      ? req.body.audienceItems.split('\n').map((s) => s.trim()).filter(Boolean)
-      : home.audienceItems,
+    audienceSubtitle: req.body.audienceSubtitle,
+    audienceFooter: req.body.audienceFooter,
+    audienceButtonText: req.body.audienceButtonText,
+    audienceButtonLink: req.body.audienceButtonLink || home.audienceButtonLink,
+    workTogetherTitle: req.body.workTogetherTitle,
+    workTogetherIntro: req.body.workTogetherIntro,
     approachesTitle: req.body.approachesTitle,
-    approachesItems: req.body.approachesItems
-      ? req.body.approachesItems.split('\n').map((s) => s.trim()).filter(Boolean)
-      : home.approachesItems,
+    approachesIntro: req.body.approachesIntro,
+    approachesFooter: req.body.approachesFooter,
+    virtualTherapyTitle: req.body.virtualTherapyTitle,
+    virtualTherapyTagline: req.body.virtualTherapyTagline,
+    virtualTherapyIntro: req.body.virtualTherapyIntro,
+    virtualTherapyWhyTitle: req.body.virtualTherapyWhyTitle,
+    virtualTherapyWhereTitle: req.body.virtualTherapyWhereTitle,
+    virtualTherapyWhereBody: req.body.virtualTherapyWhereBody,
+    virtualTherapyButtonText: req.body.virtualTherapyButtonText,
+    virtualTherapyButtonLink: req.body.virtualTherapyButtonLink || home.virtualTherapyButtonLink,
     faqsTitle: req.body.faqsTitle,
     layout: parseHomeLayout(req.body, home.layout),
   };
@@ -168,6 +183,38 @@ router.post('/home', requireAuth, (req, res) => {
   if (req.body.faqsJson) {
     try {
       updated.faqs = JSON.parse(req.body.faqsJson);
+    } catch {
+      /* keep existing */
+    }
+  }
+
+  if (req.body.concernAreasJson) {
+    try {
+      updated.concernAreas = JSON.parse(req.body.concernAreasJson);
+    } catch {
+      /* keep existing */
+    }
+  }
+
+  if (req.body.workTogetherFeaturesJson) {
+    try {
+      updated.workTogetherFeatures = JSON.parse(req.body.workTogetherFeaturesJson);
+    } catch {
+      /* keep existing */
+    }
+  }
+
+  if (req.body.approachMethodsJson) {
+    try {
+      updated.approachMethods = JSON.parse(req.body.approachMethodsJson);
+    } catch {
+      /* keep existing */
+    }
+  }
+
+  if (req.body.virtualTherapyBenefitsJson) {
+    try {
+      updated.virtualTherapyBenefits = JSON.parse(req.body.virtualTherapyBenefitsJson);
     } catch {
       /* keep existing */
     }

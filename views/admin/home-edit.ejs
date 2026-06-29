@@ -15,7 +15,8 @@
         <legend>Hero</legend>
         <label>Eyebrow <input type="text" name="heroEyebrow" value="<%= home.heroEyebrow %>" /></label>
         <label>Title <input type="text" name="heroTitle" value="<%= home.heroTitle %>" /></label>
-        <label>Lead <textarea name="heroLead" rows="5"><%= home.heroLead %></textarea></label>
+        <label>Lead bullets (one per line) <textarea name="heroLeadItems" rows="5"><%= (home.heroLeadItems || []).join('\n') %></textarea></label>
+        <label>Legacy lead paragraphs <textarea name="heroLead" rows="3"><%= home.heroLead %></textarea></label>
       </fieldset>
       <fieldset>
         <legend>Hero layout (sliders)</legend>
@@ -23,19 +24,19 @@
         <% const L = home.layout; %>
         <label class="range-label">
           Text block width <output id="out-heroCopyMaxWidth"><%= L.heroCopyMaxWidth %></output>px
-          <input type="range" name="heroCopyMaxWidth" min="420" max="680" step="10" value="<%= L.heroCopyMaxWidth %>" data-output="out-heroCopyMaxWidth" data-suffix="px" />
+          <input type="range" name="heroCopyMaxWidth" min="420" max="720" step="10" value="<%= L.heroCopyMaxWidth %>" data-output="out-heroCopyMaxWidth" data-suffix="px" />
         </label>
         <label class="range-label">
           Eyebrow font size <output id="out-heroEyebrowFontSize"><%= L.heroEyebrowFontSize %></output>px
-          <input type="range" name="heroEyebrowFontSize" min="24" max="40" step="1" value="<%= L.heroEyebrowFontSize %>" data-output="out-heroEyebrowFontSize" data-suffix="px" />
+          <input type="range" name="heroEyebrowFontSize" min="20" max="40" step="1" value="<%= L.heroEyebrowFontSize %>" data-output="out-heroEyebrowFontSize" data-suffix="px" />
         </label>
         <label class="range-label">
           Title font size <output id="out-heroTitleFontSize"><%= L.heroTitleFontSize %></output>px
-          <input type="range" name="heroTitleFontSize" min="48" max="80" step="1" value="<%= L.heroTitleFontSize %>" data-output="out-heroTitleFontSize" data-suffix="px" />
+          <input type="range" name="heroTitleFontSize" min="40" max="80" step="1" value="<%= L.heroTitleFontSize %>" data-output="out-heroTitleFontSize" data-suffix="px" />
         </label>
         <label class="range-label">
-          Portrait image width <output id="out-heroImageMaxWidth"><%= L.heroImageMaxWidth %></output>px
-          <input type="range" name="heroImageMaxWidth" min="400" max="600" step="10" value="<%= L.heroImageMaxWidth %>" data-output="out-heroImageMaxWidth" data-suffix="px" />
+          Banner image width <output id="out-heroImageMaxWidth"><%= L.heroImageMaxWidth %></output>px
+          <input type="range" name="heroImageMaxWidth" min="480" max="720" step="10" value="<%= L.heroImageMaxWidth %>" data-output="out-heroImageMaxWidth" data-suffix="px" />
         </label>
         <label class="range-label">
           Gap between text and image <output id="out-heroGap"><%= L.heroGap %></output>rem
@@ -51,19 +52,47 @@
         <label>Title <input type="text" name="aboutTitle" value="<%= home.aboutTitle %>" /></label>
         <label>Subtitle <input type="text" name="aboutSubtitle" value="<%= home.aboutSubtitle %>" /></label>
         <label>Body <textarea name="aboutBody" rows="8"><%= home.aboutBody %></textarea></label>
+        <label>Consultation heading <input type="text" name="consultationTitle" value="<%= home.consultationTitle %>" /></label>
+        <label>Consultation body <textarea name="consultationBody" rows="3"><%= home.consultationBody %></textarea></label>
       </fieldset>
       <fieldset>
-        <legend>Services section</legend>
-        <label>Title <input type="text" name="servicesTitle" value="<%= home.servicesTitle %>" /></label>
-        <label>Intro <textarea name="servicesIntro" rows="3"><%= home.servicesIntro %></textarea></label>
+        <legend>Concern areas (services)</legend>
+        <label>Section title <input type="text" name="servicesTitle" value="<%= home.servicesTitle %>" /></label>
+        <label>Intro <textarea name="servicesIntro" rows="2"><%= home.servicesIntro %></textarea></label>
+        <label>Concern areas (JSON array) <textarea name="concernAreasJson" rows="12" class="code-area"><%= JSON.stringify(home.concernAreas || [], null, 2) %></textarea></label>
       </fieldset>
       <fieldset>
-        <legend>Audience &amp; approaches</legend>
-        <label>Audience title <input type="text" name="audienceTitle" value="<%= home.audienceTitle %>" /></label>
-        <label>Audience intro <input type="text" name="audienceIntro" value="<%= home.audienceIntro %>" /></label>
-        <label>Audience items (one per line) <textarea name="audienceItems" rows="6"><%= (home.audienceItems || []).join('\n') %></textarea></label>
-        <label>Approaches title <input type="text" name="approachesTitle" value="<%= home.approachesTitle %>" /></label>
-        <label>Approaches items (one per line) <textarea name="approachesItems" rows="6"><%= (home.approachesItems || []).join('\n') %></textarea></label>
+        <legend>Welcome section</legend>
+        <label>Title <input type="text" name="audienceTitle" value="<%= home.audienceTitle %>" /></label>
+        <label>Intro <textarea name="audienceIntro" rows="3"><%= home.audienceIntro %></textarea></label>
+        <label>Closing line <textarea name="audienceFooter" rows="2"><%= home.audienceFooter %></textarea></label>
+        <label>Button text <input type="text" name="audienceButtonText" value="<%= home.audienceButtonText %>" /></label>
+        <label>Button link <input type="text" name="audienceButtonLink" value="<%= home.audienceButtonLink %>" /></label>
+      </fieldset>
+      <fieldset>
+        <legend>What it's like to work together</legend>
+        <label>Title <input type="text" name="workTogetherTitle" value="<%= home.workTogetherTitle %>" /></label>
+        <label>Intro <textarea name="workTogetherIntro" rows="4"><%= home.workTogetherIntro %></textarea></label>
+        <label>Feature cards (JSON) <textarea name="workTogetherFeaturesJson" rows="8" class="code-area"><%= JSON.stringify(home.workTogetherFeatures || [], null, 2) %></textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>My approach to therapy</legend>
+        <label>Title <input type="text" name="approachesTitle" value="<%= home.approachesTitle %>" /></label>
+        <label>Intro <textarea name="approachesIntro" rows="4"><%= home.approachesIntro %></textarea></label>
+        <label>Method cards (JSON) <textarea name="approachMethodsJson" rows="10" class="code-area"><%= JSON.stringify(home.approachMethods || [], null, 2) %></textarea></label>
+        <label>Closing line <textarea name="approachesFooter" rows="2"><%= home.approachesFooter %></textarea></label>
+      </fieldset>
+      <fieldset>
+        <legend>Virtual therapy across Canada</legend>
+        <label>Title <input type="text" name="virtualTherapyTitle" value="<%= home.virtualTherapyTitle %>" /></label>
+        <label>Tagline <input type="text" name="virtualTherapyTagline" value="<%= home.virtualTherapyTagline %>" /></label>
+        <label>Intro <textarea name="virtualTherapyIntro" rows="3"><%= home.virtualTherapyIntro %></textarea></label>
+        <label>Why virtual heading <input type="text" name="virtualTherapyWhyTitle" value="<%= home.virtualTherapyWhyTitle %>" /></label>
+        <label>Benefit cards (JSON) <textarea name="virtualTherapyBenefitsJson" rows="10" class="code-area"><%= JSON.stringify(home.virtualTherapyBenefits || [], null, 2) %></textarea></label>
+        <label>Where I provide title <input type="text" name="virtualTherapyWhereTitle" value="<%= home.virtualTherapyWhereTitle %>" /></label>
+        <label>Where I provide body <textarea name="virtualTherapyWhereBody" rows="3"><%= home.virtualTherapyWhereBody %></textarea></label>
+        <label>Button text <input type="text" name="virtualTherapyButtonText" value="<%= home.virtualTherapyButtonText %>" /></label>
+        <label>Button link <input type="text" name="virtualTherapyButtonLink" value="<%= home.virtualTherapyButtonLink %>" /></label>
       </fieldset>
       <fieldset>
         <legend>FAQs</legend>
