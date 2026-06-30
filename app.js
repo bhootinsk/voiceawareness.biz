@@ -93,7 +93,8 @@ if (typeof PhusionPassenger !== 'undefined') {
   app.listen('passenger');
 } else if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`voiceawareness.biz running on http://localhost:${PORT}`);
+    const label = process.env.SITE_DOMAIN || 'voiceawareness';
+    console.log(`${label} running on http://localhost:${PORT}`);
   });
 }
 

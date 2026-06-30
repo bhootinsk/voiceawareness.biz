@@ -5,17 +5,21 @@
 
 set -e
 
-DOMAIN_ROOT=/var/www/vhosts/voiceawareness.biz
-APP_DIR="$DOMAIN_ROOT/httpdocs"
-REPO=https://github.com/bhootinsk/voiceawareness.biz.git
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SITE=voiceawareness.biz
+
+# shellcheck source=lib/site-env.sh
+source "$SCRIPT_DIR/lib/site-env.sh"
+load_site_env "$SITE"
+
 CLONE_DIR=/tmp/vab-bootstrap
 
 echo "==> Backing up .env"
-cp "$APP_DIR/.env" /root/vab.env.bak 2>/dev/null || true
+cp "$APP_DIR/.env" "$ENV_BACKUP" 2>/dev/null || true
 
 echo "==> Cloning repository"
 rm -rf "$CLONE_DIR"
-git clone "$REPO" "$CLONE_DIR"
+git clone "$REPO_URL" "$CLONE_DIR"
 
 echo "==> Syncing application files"
 rsync -av "$CLONE_DIR/" "$APP_DIR/" \
@@ -32,26 +36,27 @@ if [ ! -f "$APP_DIR/content/home.json" ]; then
   rsync -av "$CLONE_DIR/data/" "$APP_DIR/data/"
 fi
 
-cp /root/vab.env.bak "$APP_DIR/.env" 2>/dev/null || true
+cp "$ENV_BACKUP" "$APP_DIR/.env" 2>/dev/null || true
 
 echo "==> Copying deploy scripts to domain root"
 mkdir -p "$DOMAIN_ROOT/scripts"
 rsync -av "$CLONE_DIR/scripts/" "$DOMAIN_ROOT/scripts/"
+chmod +x "$DOMAIN_ROOT/scripts/"*.sh "$DOMAIN_ROOT/scripts/lib/"*.sh 2>/dev/null || true
 
 echo "==> Stopping any manual node processes"
 pkill -f "node app.js" 2>/dev/null || true
 sleep 1
 
 echo "==> Installing systemd service"
-bash "$DOMAIN_ROOT/scripts/install-systemd.sh"
+bash "$DOMAIN_ROOT/scripts/install-systemd.sh" "$SITE_DOMAIN"
 
 echo "==> Reconfiguring Apache"
-plesk sbin httpdmng --reconfigure-domain voiceawareness.biz 2>/dev/null || true
+plesk sbin httpdmng --reconfigure-domain "$SITE_DOMAIN" 2>/dev/null || true
 
 echo ""
 echo "SUCCESS"
-echo "  systemctl status voiceawareness-biz"
-echo "  curl -s http://127.0.0.1:3000/deploy-check"
-echo "  https://www.voiceawareness.biz/"
+echo "  systemctl status $SERVICE_NAME"
+echo "  curl -s http://127.0.0.1:${APP_PORT}/deploy-check"
+echo "  $PUBLIC_URL/"
 echo ""
 echo "Future deploys: bash $DOMAIN_ROOT/scripts/deploy.sh"

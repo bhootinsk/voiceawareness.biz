@@ -1,34 +1,38 @@
 #!/bin/bash
 # Move CMS storage to a writable private folder (outside httpdocs).
-# Plesk often leaves httpdocs/content owned by root; this fixes admin saves permanently.
 #
 # Usage (as root on the server):
 #   bash /var/www/vhosts/voiceawareness.biz/scripts/setup-cms-storage.sh
+#   bash /var/www/vhosts/voiceawareness.biz/scripts/setup-cms-storage.sh voiceawareness.ca
 
 set -e
 
-DOMAIN_ROOT=/var/www/vhosts/voiceawareness.biz
-APP_DIR="$DOMAIN_ROOT/httpdocs"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SITE="${1:-$(basename "$(dirname "$SCRIPT_DIR")")}"
+
+# shellcheck source=lib/site-env.sh
+source "$SCRIPT_DIR/lib/site-env.sh"
+load_site_env "$SITE"
+
 PRIVATE_ROOT="$DOMAIN_ROOT/private/cms"
 CONTENT_DIR="$PRIVATE_ROOT/content"
 DATA_DIR="$PRIVATE_ROOT/data"
 ENV_FILE="$APP_DIR/.env"
-SERVICE_FILE=/etc/systemd/system/voiceawareness-biz.service
+INSTALLED_SERVICE="/etc/systemd/system/${SERVICE_NAME}.service"
 
-APP_USER=voiceawarenessbiz
-APP_GROUP=psacln
-
-if [ -f "$SERVICE_FILE" ]; then
-  APP_USER=$(grep '^User=' "$SERVICE_FILE" | cut -d= -f2 | tr -d ' ' || echo "$APP_USER")
-  APP_GROUP=$(grep '^Group=' "$SERVICE_FILE" | cut -d= -f2 | tr -d ' ' || echo "$APP_GROUP")
+if [ -f "$INSTALLED_SERVICE" ]; then
+  APP_USER=$(grep '^User=' "$INSTALLED_SERVICE" | cut -d= -f2 | tr -d ' ' || echo "$APP_USER")
+  APP_GROUP=$(grep '^Group=' "$INSTALLED_SERVICE" | cut -d= -f2 | tr -d ' ' || echo "$APP_GROUP")
 fi
 
 if ! id "$APP_USER" &>/dev/null; then
   echo "App user not found: $APP_USER"
+  echo "Update APP_USER in $SCRIPT_DIR/config/${SITE_DOMAIN}.env"
+  echo "Or detect from: stat -c '%U' $APP_DIR"
   exit 1
 fi
 
-echo "==> CMS storage for $APP_USER:$APP_GROUP"
+echo "==> CMS storage for $SITE_DOMAIN ($APP_USER:$APP_GROUP)"
 mkdir -p "$CONTENT_DIR/pages" "$DATA_DIR"
 
 if [ ! -f "$CONTENT_DIR/home.json" ]; then
@@ -63,6 +67,7 @@ set_env_var() {
 
 set_env_var CONTENT_DIR "$CONTENT_DIR"
 set_env_var DATA_DIR "$DATA_DIR"
+set_env_var PORT "$APP_PORT"
 
 chown "$APP_USER:$APP_GROUP" "$ENV_FILE"
 chmod 640 "$ENV_FILE"
@@ -70,8 +75,7 @@ chmod 640 "$ENV_FILE"
 echo "==> Updated $ENV_FILE"
 echo "    CONTENT_DIR=$CONTENT_DIR"
 echo "    DATA_DIR=$DATA_DIR"
+echo "    PORT=$APP_PORT"
 echo ""
 echo "Restart the app:"
-echo "  systemctl restart voiceawareness-biz"
-echo "Then check:"
-echo "  curl -s http://127.0.0.1:3000/deploy-check"
+echo "  systemctl restart $SERVICE_NAME"

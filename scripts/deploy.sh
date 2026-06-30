@@ -1,18 +1,25 @@
 #!/bin/bash
-# Deploy voiceawareness.biz from GitHub and restart the systemd service.
+# Deploy a Voice Awareness site from GitHub and restart its systemd service.
 # Run on the server as root.
+#
+# Usage:
+#   bash /var/www/vhosts/voiceawareness.biz/scripts/deploy.sh
+#   bash /var/www/vhosts/voiceawareness.ca/scripts/deploy.sh
+#   bash scripts/deploy.sh voiceawareness.ca
 
 set -e
 
-DOMAIN_ROOT=/var/www/vhosts/voiceawareness.biz
-APP_DIR="$DOMAIN_ROOT/httpdocs"
-NODE_BIN=/opt/plesk/node/24/bin
-SERVICE=voiceawareness-biz
-REPO=https://github.com/bhootinsk/voiceawareness.biz.git
-BACKUP_DIR=/root/vab-cms-backup
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SITE="${1:-$(basename "$(dirname "$SCRIPT_DIR")")}"
+
+# shellcheck source=lib/site-env.sh
+source "$SCRIPT_DIR/lib/site-env.sh"
+load_site_env "$SITE"
+
+echo "==> Deploying $SITE_DOMAIN ($PUBLIC_URL)"
 
 echo "==> Backing up .env and CMS content"
-cp "$APP_DIR/.env" /root/vab.env.bak 2>/dev/null || true
+cp "$APP_DIR/.env" "$ENV_BACKUP" 2>/dev/null || true
 mkdir -p "$BACKUP_DIR"
 rm -rf "$BACKUP_DIR/content" "$BACKUP_DIR/data" "$BACKUP_DIR/private-cms"
 [ -d "$APP_DIR/content" ] && cp -a "$APP_DIR/content" "$BACKUP_DIR/"
@@ -20,11 +27,11 @@ rm -rf "$BACKUP_DIR/content" "$BACKUP_DIR/data" "$BACKUP_DIR/private-cms"
 [ -d "$DOMAIN_ROOT/private/cms" ] && cp -a "$DOMAIN_ROOT/private/cms" "$BACKUP_DIR/private-cms"
 
 echo "==> Fetching from GitHub"
-rm -rf /tmp/vab-update
-git clone "$REPO" /tmp/vab-update
+rm -rf "$CLONE_TMP"
+git clone "$REPO_URL" "$CLONE_TMP"
 
 echo "==> Syncing application code (CMS content/data on server are preserved)"
-rsync -av /tmp/vab-update/ "$APP_DIR/" \
+rsync -av "$CLONE_TMP/" "$APP_DIR/" \
   --exclude .env \
   --exclude node_modules \
   --exclude uploads \
@@ -32,11 +39,12 @@ rsync -av /tmp/vab-update/ "$APP_DIR/" \
   --exclude data \
   --exclude .git
 
-cp /root/vab.env.bak "$APP_DIR/.env" 2>/dev/null || true
+cp "$ENV_BACKUP" "$APP_DIR/.env" 2>/dev/null || true
 
 echo "==> Updating deploy scripts"
-rsync -av /tmp/vab-update/scripts/ "$DOMAIN_ROOT/scripts/"
-chmod +x "$DOMAIN_ROOT/scripts/"*.sh
+mkdir -p "$DOMAIN_ROOT/scripts"
+rsync -av "$CLONE_TMP/scripts/" "$DOMAIN_ROOT/scripts/"
+chmod +x "$DOMAIN_ROOT/scripts/"*.sh "$DOMAIN_ROOT/scripts/lib/"*.sh 2>/dev/null || true
 
 echo "==> Installing dependencies"
 cd "$APP_DIR"
@@ -44,30 +52,30 @@ export PATH="$NODE_BIN:$PATH"
 npm install --production
 
 echo "==> Fixing CMS storage and permissions"
-bash "$DOMAIN_ROOT/scripts/setup-cms-storage.sh"
+bash "$DOMAIN_ROOT/scripts/setup-cms-storage.sh" "$SITE_DOMAIN"
 
-echo "==> Restarting service"
-if systemctl is-enabled "$SERVICE" >/dev/null 2>&1; then
-  systemctl restart "$SERVICE"
+echo "==> Restarting $SERVICE_NAME"
+if systemctl is-enabled "$SERVICE_NAME" >/dev/null 2>&1; then
+  systemctl restart "$SERVICE_NAME"
 else
-  echo "Service not installed yet. Run scripts/install-systemd.sh first."
+  echo "Service not installed yet. Run: bash $DOMAIN_ROOT/scripts/install-systemd.sh $SITE_DOMAIN"
   exit 1
 fi
 
 sleep 2
-echo "==> Health check"
-curl -sf http://127.0.0.1:3000/deploy-check
+echo "==> Health check (port $APP_PORT)"
+curl -sf "http://127.0.0.1:${APP_PORT}/deploy-check"
 echo ""
 
-CHECK=$(curl -sf http://127.0.0.1:3000/deploy-check || echo '{}')
+CHECK=$(curl -sf "http://127.0.0.1:${APP_PORT}/deploy-check" || echo '{}')
 if ! echo "$CHECK" | grep -q '"homeJson":true'; then
   echo "WARNING: CMS files are not writable. Re-running setup..."
-  bash "$DOMAIN_ROOT/scripts/setup-cms-storage.sh"
-  systemctl restart "$SERVICE"
+  bash "$DOMAIN_ROOT/scripts/setup-cms-storage.sh" "$SITE_DOMAIN"
+  systemctl restart "$SERVICE_NAME"
   sleep 2
-  curl -sf http://127.0.0.1:3000/deploy-check
+  curl -sf "http://127.0.0.1:${APP_PORT}/deploy-check"
   echo ""
 fi
 
-echo "Done. https://www.voiceawareness.biz/"
+echo "Done. $PUBLIC_URL/"
 echo "CMS content/data on the server were not changed."

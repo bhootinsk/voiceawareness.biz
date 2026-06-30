@@ -3,23 +3,32 @@
 #
 # Usage:
 #   bash /var/www/vhosts/voiceawareness.biz/scripts/restore-cms-backup.sh
+#   bash /var/www/vhosts/voiceawareness.ca/scripts/restore-cms-backup.sh voiceawareness.ca
 
 set -e
 
-APP_DIR=/var/www/vhosts/voiceawareness.biz/httpdocs
-BACKUP_DIR=/root/vab-cms-backup
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SITE="${1:-$(basename "$(dirname "$SCRIPT_DIR")")}"
 
-if [ ! -d "$BACKUP_DIR/content" ] && [ ! -d "$BACKUP_DIR/data" ]; then
+# shellcheck source=lib/site-env.sh
+source "$SCRIPT_DIR/lib/site-env.sh"
+load_site_env "$SITE"
+
+if [ ! -d "$BACKUP_DIR/content" ] && [ ! -d "$BACKUP_DIR/data" ] && [ ! -d "$BACKUP_DIR/private-cms" ]; then
   echo "No backup found at $BACKUP_DIR"
   exit 1
 fi
 
-echo "==> Restoring CMS backup"
-[ -d "$BACKUP_DIR/content" ] && rsync -av "$BACKUP_DIR/content/" "$APP_DIR/content/"
-[ -d "$BACKUP_DIR/data" ] && rsync -av "$BACKUP_DIR/data/" "$APP_DIR/data/"
+echo "==> Restoring CMS backup for $SITE_DOMAIN"
 
-chown -R voiceawarenessbiz:psacln "$APP_DIR/content" "$APP_DIR/data"
-chmod -R u+rwX "$APP_DIR/content" "$APP_DIR/data"
+if [ -d "$BACKUP_DIR/private-cms" ]; then
+  rsync -av "$BACKUP_DIR/private-cms/" "$DOMAIN_ROOT/private/cms/"
+  chown -R "$APP_USER:$APP_GROUP" "$DOMAIN_ROOT/private/cms"
+elif [ -d "$BACKUP_DIR/content" ]; then
+  [ -d "$BACKUP_DIR/content" ] && rsync -av "$BACKUP_DIR/content/" "$APP_DIR/content/"
+  [ -d "$BACKUP_DIR/data" ] && rsync -av "$BACKUP_DIR/data/" "$APP_DIR/data/"
+  chown -R "$APP_USER:$APP_GROUP" "$APP_DIR/content" "$APP_DIR/data"
+fi
 
-systemctl restart voiceawareness-biz
-echo "Restored. Check https://www.voiceawareness.biz/"
+systemctl restart "$SERVICE_NAME"
+echo "Restored. Check $PUBLIC_URL/"

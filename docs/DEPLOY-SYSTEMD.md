@@ -76,6 +76,14 @@ bash /var/www/vhosts/voiceawareness.biz/scripts/install-systemd.sh
 bash /var/www/vhosts/voiceawareness.biz/scripts/deploy.sh
 ```
 
+**Both domains (mirror):**
+
+```bash
+bash /var/www/vhosts/voiceawareness.biz/scripts/deploy-all.sh
+```
+
+See **[DEPLOY-VOICEAWARENESS-CA.md](./DEPLOY-VOICEAWARENESS-CA.md)** for cloning .biz → .ca.
+
 Or manually:
 
 ```bash
