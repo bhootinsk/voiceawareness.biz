@@ -218,8 +218,9 @@
       "answer": "You don't need to come into therapy with all the answers. Many people start therapy simply knowing that something doesn't feel right. Together, we'll explore what's been on your mind and help make sense of it, one conversation at a time."
     }
   ],
-  "contactPsychologyHeading": "CONTACT ME AT PSYCHOLGYTODAY",
+  "contactPsychologyHeading": "",
   "contactPhoneHeading": "Call Toll Free at (1) 800 857 0609 OR send a message below",
+  "contactLocationQuestion": "Are you located in Canada?*",
   "images": {
     "heroBanner": "/images/hero-banner.png",
     "heroPortrait": "/images/hero-banner.png",

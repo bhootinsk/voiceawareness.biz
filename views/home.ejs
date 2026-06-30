@@ -195,9 +195,11 @@
   <section class="section contact-section" id="bookafreeconsulation">
     <div class="container contact-layout">
       <div class="contact-copy">
-        <h2>
-          <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener noreferrer"><%= home.contactPsychologyHeading %></a>
-        </h2>
+        <% if (home.contactPsychologyHeading) { %>
+          <h2>
+            <a href="<%= site.psychologyToday %>" target="_blank" rel="noopener noreferrer"><%= home.contactPsychologyHeading %></a>
+          </h2>
+        <% } %>
         <h2 class="contact-phone-heading"><%= home.contactPhoneHeading %></h2>
         <form class="contact-form" method="post" action="/contact">
           <div class="form-row">
@@ -225,7 +227,7 @@
             <textarea name="message" rows="5" placeholder="Type your message here..." required></textarea>
           </label>
           <fieldset class="radio-group">
-            <legend>Are you located in Ontario, CA?*</legend>
+            <legend><%= home.contactLocationQuestion || 'Are you located in Canada?*' %></legend>
             <label><input type="radio" name="inOntario" value="yes" required /> Yes</label>
             <label><input type="radio" name="inOntario" value="no" /> No</label>
           </fieldset>

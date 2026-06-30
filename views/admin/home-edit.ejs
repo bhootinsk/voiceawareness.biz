@@ -95,6 +95,14 @@
         <label>Button link <input type="text" name="virtualTherapyButtonLink" value="<%= home.virtualTherapyButtonLink %>" /></label>
       </fieldset>
       <fieldset>
+        <legend>Contact form (bottom of home page)</legend>
+        <label>Psychology Today heading <span class="help">Leave blank to hide</span>
+          <input type="text" name="contactPsychologyHeading" value="<%= home.contactPsychologyHeading %>" />
+        </label>
+        <label>Phone / intro heading <input type="text" name="contactPhoneHeading" value="<%= home.contactPhoneHeading %>" /></label>
+        <label>Location question <input type="text" name="contactLocationQuestion" value="<%= home.contactLocationQuestion %>" /></label>
+      </fieldset>
+      <fieldset>
         <legend>FAQs</legend>
         <label>Section title <input type="text" name="faqsTitle" value="<%= home.faqsTitle %>" /></label>
         <label>FAQs (JSON array) <textarea name="faqsJson" rows="12" class="code-area"><%= JSON.stringify(home.faqs || [], null, 2) %></textarea></label>

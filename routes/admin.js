@@ -176,6 +176,9 @@ router.post('/home', requireAuth, (req, res) => {
     virtualTherapyWhereBody: req.body.virtualTherapyWhereBody,
     virtualTherapyButtonText: req.body.virtualTherapyButtonText,
     virtualTherapyButtonLink: req.body.virtualTherapyButtonLink || home.virtualTherapyButtonLink,
+    contactPsychologyHeading: req.body.contactPsychologyHeading,
+    contactPhoneHeading: req.body.contactPhoneHeading,
+    contactLocationQuestion: req.body.contactLocationQuestion,
     faqsTitle: req.body.faqsTitle,
     layout: parseHomeLayout(req.body, home.layout),
   };
