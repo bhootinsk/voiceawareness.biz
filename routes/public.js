@@ -1,6 +1,7 @@
 const express = require('express');
 const content = require('../lib/content');
 const { mergeHomeLayout } = require('../lib/home-layout');
+const { sendContactEmail, smtpConfigured, getContactTo } = require('../lib/mail');
 
 const router = express.Router();
 
@@ -13,9 +14,12 @@ const SERVICE_SLUGS = [
 
 router.get('/', (req, res) => {
   const home = content.getHome();
+  const contactError = req.session.contactError || null;
+  delete req.session.contactError;
   res.render('home', {
     title: 'Psychotherapy Counseling Services',
     home: { ...home, layout: mergeHomeLayout(home.layout) },
+    contactError,
   });
 });
 
@@ -68,17 +72,43 @@ router.get('/privacy-policy', (req, res) => {
   res.render('page', { title: page.title, page });
 });
 
-router.post('/contact', (req, res) => {
-  // Phase 1: acknowledge submission. Email integration can be added later.
-  console.log('Contact form submission:', {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    phone: req.body.phone,
-    message: req.body.message,
-    inOntario: req.body.inOntario,
-  });
-  res.redirect('/thank-you');
+router.post('/contact', async (req, res) => {
+  const site = content.getSite();
+  const payload = {
+    firstName: String(req.body.firstName || '').trim(),
+    lastName: String(req.body.lastName || '').trim(),
+    email: String(req.body.email || '').trim(),
+    phone: String(req.body.phone || '').trim(),
+    message: String(req.body.message || '').trim(),
+    inCanada: req.body.inOntario === 'yes' ? 'yes' : 'no',
+    siteDomain: site.domain || 'voiceawareness',
+  };
+
+  if (!payload.firstName || !payload.lastName || !payload.email || !payload.message) {
+    req.session.contactError = 'Please fill in all required fields.';
+    return res.redirect('/#bookafreeconsulation');
+  }
+
+  if (String(req.body.captcha || '').trim() !== '17') {
+    req.session.contactError = 'The security check answer was incorrect. Please try again.';
+    return res.redirect('/#bookafreeconsulation');
+  }
+
+  if (!smtpConfigured()) {
+    console.error('Contact form: SMTP not configured in .env');
+    req.session.contactError = `Messages cannot be sent yet. Please email ${site.email || getContactTo()} directly.`;
+    return res.redirect('/#bookafreeconsulation');
+  }
+
+  try {
+    await sendContactEmail(payload);
+    console.log('Contact form email sent for:', payload.email);
+    return res.redirect('/thank-you');
+  } catch (err) {
+    console.error('Contact form email failed:', err.message);
+    req.session.contactError = `We could not send your message. Please email ${site.email || getContactTo()} or call us.`;
+    return res.redirect('/#bookafreeconsulation');
+  }
 });
 
 module.exports = router;

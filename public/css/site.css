@@ -811,6 +811,15 @@ p {
   margin-top: 1.5rem;
 }
 
+.contact-form-error {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  background: #fff3f3;
+  border: 1px solid #e8b4b4;
+  color: #8a1f1f;
+  border-radius: 3px;
+}
+
 .contact-form input,
 .contact-form textarea {
   width: 100%;

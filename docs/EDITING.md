@@ -62,6 +62,22 @@ ADMIN_PASSWORD=yourpassword
 
 Avoid quotes unless needed. If the password contains `$`, wrap in single quotes in `.env` or change the password to avoid `$` (systemd can mangle `$` in `EnvironmentFile`).
 
+**Contact form email** — add to each site’s `httpdocs/.env` (both `.biz` and `.ca`):
+
+```env
+CONTACT_TO=info@voiceawareness.ca
+CONTACT_FROM=info@voiceawareness.ca
+SMTP_HOST=mail.voiceawareness.ca
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=info@voiceawareness.ca
+SMTP_PASS=your-mailbox-password
+```
+
+Then `systemctl restart voiceawareness-biz` and `systemctl restart voiceawareness-ca`.
+
+Submissions go to **CONTACT_TO** (default `info@voiceawareness.ca`). Reply-To is set to the visitor’s email.
+
 **4. Save fails with “cannot write content files”**
 
 Plesk often keeps `httpdocs/content/` owned by root. Move CMS storage to a writable private folder:

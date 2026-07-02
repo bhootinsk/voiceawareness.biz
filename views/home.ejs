@@ -201,6 +201,9 @@
           </h2>
         <% } %>
         <h2 class="contact-phone-heading"><%= home.contactPhoneHeading %></h2>
+        <% if (typeof contactError !== 'undefined' && contactError) { %>
+          <p class="contact-form-error" role="alert"><%= contactError %></p>
+        <% } %>
         <form class="contact-form" method="post" action="/contact">
           <div class="form-row">
             <label>
