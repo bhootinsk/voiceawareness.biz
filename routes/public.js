@@ -62,6 +62,12 @@ router.get('/thank-you', (req, res) => {
   });
 });
 
+router.get('/privacy-policy', (req, res) => {
+  const page = content.getPage('privacy-policy');
+  if (!page) return res.status(404).render('404', { title: 'Not Found' });
+  res.render('page', { title: page.title, page });
+});
+
 router.post('/contact', (req, res) => {
   // Phase 1: acknowledge submission. Email integration can be added later.
   console.log('Contact form submission:', {
